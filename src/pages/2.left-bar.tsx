@@ -15,8 +15,6 @@ export function LeftBar() {
     mb: 5,
   }
 
-
-
   const IconCss = {
     fontSize: 30
   }
@@ -44,6 +42,7 @@ export function LeftBar() {
 
   return (
     <>
+    
         <Box bg="black" w='400px' h="3000" color="white" p="20px 0 0 150px" m={0}>
 
         <Heading as="h1" sx={HeadingCss}>
