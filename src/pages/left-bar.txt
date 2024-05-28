@@ -1,0 +1,17 @@
+import { Container, Text } from '@chakra-ui/react'
+import React from 'react'
+
+export function LeftBar() {
+  return (
+    <>
+        <Container bg="black" w="100%" color="white">
+
+        <Text>
+            test
+        </Text>
+
+        </Container>
+    </>
+  )
+}
+
