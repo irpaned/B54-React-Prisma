@@ -118,7 +118,7 @@ import express, { Request, Response } from "express";
 
             if(!thread) return res.status(500).json( {message : "Thread not found!"} )
 
-            // ini 👇 cara bacanya : kalau misalkan gaada berarti gausah di update, kalau ada baru diupdate test
+            // ini 👇 cara bacanya : kalau misalkan gaada berarti gausah di update, kalau ada baru diupdate 
             if (dto.content) { 
                 thread.content = dto.content;
             }
