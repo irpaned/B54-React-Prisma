@@ -15,6 +15,7 @@ export function LearnChakra2() {
       <Box h="200px" border="2px solid black">b</Box>
       <Box h="200px" border="2px solid black">c</Box>
       <Box h="200px" border="2px solid black">d</Box>
+      <Box h="200px" border="2px solid black">d</Box>
     </SimpleGrid>
     </>
   )
