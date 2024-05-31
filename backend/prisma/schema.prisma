@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int     @id @default(autoincrement())
+  email        String  @unique // cuma boleh ada 1 jenis email
+  userName     String
+  fullName     String
+  password     String
+  photoProfile String?
+  bio          String?
+
+  threads   Thread[]
+  replies   Reply[]
+  likes     Like[]
+  following Following[]
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @default(now())
+
+  @@map("user") // ganti nama table
+}
+
+model Thread {
+  id              Int     @id @default(autoincrement())
+  content         String
+  avatar          String?
+  image           String?
+  numberOfReplies Int
+  numberOfLike    Int
+  numberOfShare   Int
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @default(now())
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  @@map("threads")
+}
+
+model Following {
+  id          Int @id @default(autoincrement())
+  followingId Int
+  followerId  Int
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+
+  @@map("following")
+}
+
+model Reply {
+  id       Int     @id @default(autoincrement())
+  userId   Int
+  threadId Int
+  image    String?
+  content  String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @default(now())
+
+  createdBy DateTime @default(now())
+  updateBy  DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+
+  @@map("replies")
+}
+
+model Like {
+  id       Int     @id @default(autoincrement())
+  userId   Int
+  threadId Int
+  image    String?
+  content  String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @default(now())
+
+  createdBy DateTime @default(now())
+  updateBy  DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+
+  @@map("likes")
+}

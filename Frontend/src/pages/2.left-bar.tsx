@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Heading, HStack, Icon, Spacer, Text } from '@chakra-ui/react'
+import { Box, Button, Container, Flex, Heading, HStack, Icon, Link, Spacer, Text, textDecoration } from '@chakra-ui/react'
 import React from 'react'
 
 import { FaRegHeart } from "react-icons/fa";
@@ -11,24 +11,28 @@ import { color } from 'framer-motion';
 
 export function LeftBar() {
 
+  const LinkCss = {
+    ":hover" : {
+      textDecoration: "none"
+    }
+  }
+
   const CssDivFlex = {
     mb: 5,
   }
-
-
 
   const IconCss = {
     fontSize: 30
   }
 
   const HeadingCss = {
-    color: "green",
+    color: "brand.900",
     fontSize: 50
   }
 
   const buttonCreate = {
-    bg: "green",
-    color: "white",
+    bg: "brand.900",
+    color: "brand.800", 
     width: 200,
     borderRadius: 30,
     fontSize: 20,
@@ -37,13 +41,14 @@ export function LeftBar() {
     fontWeight: "bold",
     p: "3px 10px 5px 10px",
     ":hover" : {
-      bg: "white",
+      bg: "brand.800",
       color : "black"
     }
   }
 
   return (
     <>
+    
         <Box bg="black" w='400px' h="3000" color="white" p="20px 0 0 150px" m={0}>
 
         <Heading as="h1" sx={HeadingCss}>
@@ -53,8 +58,8 @@ export function LeftBar() {
         <Box mt="5">
           <Flex sx={CssDivFlex}>
             <HStack>
-              <a href="#"><Icon sx={IconCss} as={BiSolidHomeSmile}/></a>
-              <a style={{fontSize: 20}} href='#'>Home</a>
+              <Link href="http://localhost:5173/login"><Icon sx={IconCss} as={BiSolidHomeSmile}/></Link>
+              <Link href="http://localhost:5173/login" style={{fontSize: 20}} sx={LinkCss} >Home</Link>
             </HStack>
           </Flex>
           <Flex sx={CssDivFlex}>

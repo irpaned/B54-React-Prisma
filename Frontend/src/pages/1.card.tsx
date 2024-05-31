@@ -1,14 +1,15 @@
-import React from 'react'
-import { BsThreeDotsVertical } from "react-icons/bs"; 
-import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Heading, Box, Text, Image, IconButton, Button, WrapItem, Input, Container, Spacer, HStack, Icon, border } from '@chakra-ui/react'
-import { BiChat, BiLike, BiShare } from 'react-icons/bi';
-import { FaImage } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, HStack, Heading, Icon, IconButton, Image, Input, Text, WrapItem } from '@chakra-ui/react';
+import React from 'react';
+import { BiChat, BiShare } from 'react-icons/bi';
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaImage, FaRegHeart } from "react-icons/fa";
 
 export function CardBeranda() {
 
+  
+
   const ButtonPost = {
-    bg: "green",
+    bg: "brand.900",
     color: "white",
     borderRadius: 30,
     p: "0px 20px 1px 20px",
@@ -41,7 +42,7 @@ export function CardBeranda() {
                 <Avatar size='md' name='Ryan Florence' src='https://bit.ly/ryan-florence' />{' '}
               </WrapItem>
               <Input  w="400px" placeholder='What is Happening?' border="none" color="white" />
-              <Icon color="green" fontSize={25} as={FaImage}></Icon>
+              <Icon color="brand.900" fontSize={25} as={FaImage}></Icon>
               <Button sx={ButtonPost}>Post</Button>
             </HStack>
           </Flex>
@@ -53,13 +54,14 @@ export function CardBeranda() {
 
           <Flex letterSpacing={1}>
             <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-              <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
+              <Avatar name='Segun Adebayo' src='https://images.pexels.com/photos/832908/pexels-photo-832908.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' />
 
               <Box>
-                <Heading size='sm'>Segun Adebayo</Heading>
-                <Text color="grey">@segun</Text>
+                <Heading size='sm'>Muhammad Irfan</Heading>
+                <Text color="grey">@irfan</Text>
               </Box>
-            </Flex>
+          </Flex>
+
             <IconButton
               variant='ghost'
               color= "grey"
@@ -68,16 +70,14 @@ export function CardBeranda() {
             />
           </Flex>
         </CardHeader>
-        <CardBody>
+        <CardBody p="8px 0 8px 5px">
           <Text>
-            With Chakra UI, I wanted to sync the speed of development with the speed
-            of design. I wanted the developer to be just as excited as the designer to
-            create a screen.
+            The most beautiful view i have ever seen in my life😍
           </Text>
         </CardBody>
-        <Image
+        <Image borderRadius="20px"
           objectFit='cover'
-          src='https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+          src='https://images.pexels.com/photos/2668314/pexels-photo-2668314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
           alt='Chakra UI'
         />
 
@@ -104,8 +104,25 @@ export function CardBeranda() {
         </Box>
           
     </Box>
+   
     
 </>
 )
 }
 
+// state management
+// const state = useContext(TransactionContext);
+
+//   console.log("transaction", state?.transactions)
+
+//   useEffect(() => {
+//     state?.AddNewTransaction({
+//       id: 123,
+//       name: "Irfan",
+//       price: 123,
+//       qty: 123
+//     });
+//   }, []);
+
+
+//   {JSON.stringify(state?.transactions)}
