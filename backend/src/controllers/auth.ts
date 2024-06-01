@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import ThreadService from "../service/thread"
+import AuthService from "../service/auth"
 
 async function login(req: Request, res: Response)  {
     try {
-        const createdThread = await ThreadService.create(req.body);
+        const user = await AuthService.login(req.body);
 
-        res.json(createdThread);
+        res.json(user);
     } catch (error) {
         res.json({
             message : error,
@@ -15,9 +15,9 @@ async function login(req: Request, res: Response)  {
 
 async function register(req: Request, res: Response)  {
     try {
-        const createdThread = await ThreadService.create(req.body);
+        const user = await AuthService.register(req.body);
 
-        res.json(createdThread);
+        res.json(user);
     } catch (error) {
         res.json({
             message : error,

@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { CreateThreadDTO, UpdateThreadDTO } from "../dto/thread-dto";
 import { createThreadSchema } from "../validators/thread";
 import { error } from "console";
+import { v2 as cloudinary } from "cloudinary";
 
     const prisma = new PrismaClient();
 
@@ -27,23 +28,33 @@ import { error } from "console";
             }
         }
 
-    async function create(dto : CreateThreadDTO) {
+
+    async function create(dto: CreateThreadDTO) {
         try {
-            // validasi menggunakan joi
-           const validate = createThreadSchema.validate(dto) 
-
-           if(validate.error) {
-            return validate.error.details
-           }
-
-            return await prisma.thread.create({
-                data: { ...dto  },
-            });
+        //   validasi menggunakan joi
+          const validate = createThreadSchema.validate(dto);
+      
+          if (validate.error) {
+            throw new String(validate.error.message);
+          }
+      
+          cloudinary.config({
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            api_secret: process.env.CLOUDINARY_API_SECRET,
+          });
+      
+          const upload = await cloudinary.uploader.upload(dto.image, {
+            upload_preset: "b54circle",
+          });
+      
+          return await prisma.thread.create({
+            data: { ...dto, image : upload.secure_url },
+          });
         } catch (error) {
-            return error
+          throw new String(error);
         }
-        
-    }
+      }
 
     async function update(id : number, dto : UpdateThreadDTO) {
        try {
@@ -57,9 +68,6 @@ import { error } from "console";
             thread.content = dto.content;
         }
 
-        if (dto.avatar) { 
-            thread.avatar = dto.avatar;
-        }
 
         if (dto.image) { 
             thread.image = dto.image;

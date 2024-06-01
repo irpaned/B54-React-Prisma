@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import ThreadService from "../service/thread"
 
 import {  CreateThreadDTO, UpdateThreadDTO } from "../dto/thread-dto";
+import path from "path";
 
 
 
@@ -28,8 +29,15 @@ import {  CreateThreadDTO, UpdateThreadDTO } from "../dto/thread-dto";
 
 
     async function create(req: Request, res: Response)  {
+    
+
         try {
-            const createdThread = await ThreadService.create(req.body);
+
+            const body = {
+                ...req.body,
+                image: req.file? req.file.path : "",
+            } 
+            const createdThread = await ThreadService.create(body);
 
             res.json(createdThread);
         } catch (error) {
