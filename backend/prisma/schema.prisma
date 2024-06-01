@@ -16,7 +16,7 @@ datasource db {
 model User {
   id           Int     @id @default(autoincrement())
   email        String  @unique // cuma boleh ada 1 jenis email
-  userName     String
+  userName     String  @unique
   fullName     String
   password     String
   photoProfile String?
@@ -27,8 +27,8 @@ model User {
   likes     Like[]
   following Following[]
 
-  createdAt DateTime @default(now())
-  updateAt  DateTime @default(now())
+  createdAt DateTime @default(now()) 
+  updateAt  DateTime @default(now()) @updatedAt
 
   @@map("user") // ganti nama table
 }
@@ -36,11 +36,10 @@ model User {
 model Thread {
   id              Int     @id @default(autoincrement())
   content         String
-  avatar          String?
   image           String?
-  numberOfReplies Int
-  numberOfLike    Int
-  numberOfShare   Int
+  numberOfReplies Int?
+  numberOfLike    Int?
+  numberOfShare   Int?
 
   createdAt DateTime @default(now())
   updateAt  DateTime @default(now())
