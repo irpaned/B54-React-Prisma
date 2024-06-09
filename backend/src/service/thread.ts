@@ -1,3 +1,5 @@
+// disini adalah kumpulan logic, bukan tempat mengembalikan respon
+
 import { PrismaClient } from "@prisma/client";
 import { CreateThreadDTO, UpdateThreadDTO } from "../dto/thread-dto";
 import { createThreadSchema } from "../validators/thread";
@@ -20,11 +22,11 @@ import { v2 as cloudinary } from "cloudinary";
                 where: { id },
             });
 
-            if(!thread) return null;
+            if(!thread) throw new String("Thread not found!");;
 
             return thread;
         }   catch (error) {
-            return error;
+            throw new String(error);
             }
         }
 
@@ -73,25 +75,13 @@ import { v2 as cloudinary } from "cloudinary";
             thread.image = dto.image;
         }
 
-        if (dto.numberOfReplies) { 
-            thread.numberOfReplies = dto.numberOfReplies;
-        }
-
-        if (dto.numberOfLike) { 
-            thread.numberOfLike = dto.numberOfLike;
-        }
-
-        if (dto.numberOfShare) { 
-            thread.numberOfShare = dto.numberOfShare;
-        }
-
         return await prisma.thread.update({
             where : { id : Number(id) },
             data : { ...thread }
         }); 
 
        } catch (error) {
-            return error
+            throw new String(error);
        }
        
         
@@ -106,7 +96,7 @@ import { v2 as cloudinary } from "cloudinary";
             });
 
         } catch (error) {
-            return error
+            throw new String(error)
         }
         
     }

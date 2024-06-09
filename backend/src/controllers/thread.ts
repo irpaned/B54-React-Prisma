@@ -11,26 +11,28 @@ import path from "path";
         const threads = await ThreadService.find()
         return res.json(threads);
     }   catch (error) {
-        return error;
+        res.status(500).json({ message : error.message })
         }
     }
 
     async function findOne (req: Request, res: Response) {
+        
         try {
             const { id } = req.params;
-
             const threads = await ThreadService.findOne(Number(id))
+
+            if(!threads) {
+                return res.status(404).json({ message : "Thread not found" })
+            }
 
             res.json(threads);
         } catch (error) {
-            res.json(error)
+            res.status(500).json({ message : error.message })
         }
     }
 
 
     async function create(req: Request, res: Response)  {
-    
-
         try {
 
             const body = {
@@ -39,13 +41,12 @@ import path from "path";
             } 
             const createdThread = await ThreadService.create(body);
 
-            res.json(createdThread);
+            res.status(201).json(createdThread);
         } catch (error) {
-            res.json({
-                message : error,
-            })
-        };  
+          res.status(500).json({ message: error.message });
+        }
     }
+
 
     async function update(req: Request, res: Response) {
         try {
@@ -55,7 +56,7 @@ import path from "path";
         // pengecekan
         const thread = await ThreadService.findOne(Number(id))
 
-        if(!thread) res.json({
+        if(!thread) res.status(404).json({
             message : "Thread not found!"
         })
         // pengecekan
@@ -64,7 +65,7 @@ import path from "path";
         res.json(updatedThread)
 
         } catch (error) {
-            res.json({
+            res.status(500).json({
                 message : error
             })
         }
@@ -80,7 +81,7 @@ import path from "path";
             // pengecekan
             const thread = await ThreadService.findOne(Number(id))
 
-            if(!thread) res.json({
+            if(!thread) res.status(404).json({
                 message : "Thread not found!"
             })
             // pengecekan
@@ -89,7 +90,7 @@ import path from "path";
         res.json(DeleteThreads);
 
         } catch (error) {
-            res.json({
+            res.status(500).json({
                 message : error
             })
         }

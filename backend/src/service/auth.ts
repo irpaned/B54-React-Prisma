@@ -14,7 +14,7 @@ import { error } from "console";
            const validate = loginSchema.validate(dto) 
 
            if(validate.error) {
-            return validate.error.details
+            throw new String(validate.error.message);
            }
 
         //  cek apakah ada usernya ada atau tidak
@@ -25,7 +25,7 @@ import { error } from "console";
            })
 
            if(!user) {
-            throw new Error("User not found!")
+            throw new String("User not found!")
            }
 
            // compare password serta cek validnya
@@ -43,7 +43,7 @@ import { error } from "console";
 
             return { token, user }
         } catch (error) {
-            return error
+            throw new String(error);
         }
         
     }
@@ -59,17 +59,20 @@ import { error } from "console";
             dto.password = hashedPassword
 
            if(validate.error) {
-            return validate.error.details
+            throw new String("User not found!")
            }
 
             return await prisma.user.create({
                 data: { ...dto  },
             });
         } catch (error) {
-            return error
+            throw new String(error);
         }
         
     }
+
+    // check ga butuh DTO
+   
 
     // async function create(dto : registerDTO) {
     //     try {
