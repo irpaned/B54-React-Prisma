@@ -1,7 +1,7 @@
 export type CreateThreadDTO = {
     content : string,
-    avatar : string,
     image : string,
+    avatar : string,
     numberOfReplies : number, 
     numberOfLike : number,
     numberOfShare : number

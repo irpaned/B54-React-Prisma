@@ -1,86 +1,32 @@
-import { Box, BoxProps, Button, Flex, Heading, Icon, Input, InputGroup, InputRightElement, Link, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { SiAnimalplanet } from "react-icons/si";
-import { api } from '../../../libraries/api';
-import { SET_USER } from '../../../redux/slices/auth';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Box, BoxProps, Button, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text } from '@chakra-ui/react';
+import React from 'react';
+import { useLoginForm } from '../hook/use-login-form';
 
 
 interface LoginFormProps extends BoxProps{}
 
-type LoginForm = {
-  email : string,
-  password : string
-}
-
-
 export function LoginForm(props : LoginFormProps) {
-  const [show, setShow] = React.useState(false)
-  const handleClick = () => setShow(!show)
-
-  const [form, setForm] = useState<LoginForm>({
-    email : "",
-    password : ""
-  });
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  function handleChange (event : React.ChangeEvent<HTMLInputElement> ) {
-    const name = event.target.name
-    const value = event.target.value
-
-    console.log(name);
-    console.log(value);
-    
-    
-    setForm({
-      ...form,
-      [name] : value
-    })
-  }
-
-  async function handleSubmit () {
-    try {      
-      const response = await api.post("/auth/login", form)
-      console.log("response" ,response.data);
-      const user = response.data.user
-      const token = response.data.token
-
-      // cara bacanya apabila betulan token maka akan dimasukkan ke localstorage kita 1:21:05 day 8
-      if(token) localStorage.setItem("token", token)
-      if(user) {
-        dispatch(SET_USER(user))
-        navigate("/test-redux") // ini nanti ganti ke profile
-      }
-        
-      
-    } catch (error) {
-      console.log(error);
-      
-    }
-
-  }
-
+  
+  const {handleSubmit, onSubmit, register, errors, handleClick, setShow, show} = useLoginForm()
+  
   return (
+    <form onSubmit={handleSubmit(onSubmit)}>
     <Box m="auto" w="450px" p="10px 10px 10px 10px" mt="150px">
       {/* <Icon fontSize="150px" color="brand.900" as={SiAnimalplanet}/> */}
       <Heading fontSize="50px" color="brand.900" >Circle</Heading>
       <Heading size="lg" mb="15px" color="brand.800">Login to Circle</Heading>
 
         <Input 
-        name='email'
-        onChange={handleChange} 
+        {...register("email")}
         placeholder='Email/Username' 
         size='md' 
-        mb="13px" 
+        mb="7px"
         borderColor="white" 
         color="white" />
-        <InputGroup size='md' mb="10px">
+        <Text color={"red"}>{errors.email?.message}</Text>
+        <InputGroup size='md'  mt="7px"  mb="10px">
       <Input
-        name='password'
-        onChange={handleChange}
+        {...register("password")}
         pr='4.5rem'
         type={show ? 'text' : 'password'}
         placeholder='Password'
@@ -92,18 +38,29 @@ export function LoginForm(props : LoginFormProps) {
         </Button>
       </InputRightElement>
     </InputGroup>
+    <Text color={"red"}>{errors.password?.message}</Text>
     <Flex justifyContent="end" mb="10px">
       <Link color="brand.800">Forgot password?</Link>
     </Flex>
 
-    <Button onClick={handleSubmit} w="100%" bg="brand.900" borderRadius="20px" mb="10px" color="white">Login</Button>
+    <Button 
+    isDisabled={!!(errors.email?.message || errors.password?.message)}
+    type='submit'
+    w="100%" bg="brand.900" 
+    borderRadius="20px" 
+    mb="10px" 
+    color="white">Login</Button>
       <Flex>
         <Text color="white">Don't have an account yet?</Text>
         <Link href='http://localhost:5173/create' color="brand.900" ml="5px">Create Account</Link>
       </Flex>
       
     </Box>
-    
+    </form>
   )
+}
+
+function toast(arg0: { title: string; status: string; duration: number; isClosable: boolean; }) {
+  throw new Error('Function not implemented.');
 }
 

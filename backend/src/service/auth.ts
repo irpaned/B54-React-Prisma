@@ -50,9 +50,10 @@ import { error } from "console";
 
     async function register(dto : registerDTO) {
         try {
-            // validasi menggunakan joi
+            // 1. validasi menggunakan joi
            const validate = registerSchema.validate(dto) 
 
+           // 2. setelah itu kita hashed
             const salt = 10
             const hashedPassword = await bcrypt.hash(dto.password, salt)
 

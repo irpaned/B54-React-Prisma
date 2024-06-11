@@ -12,7 +12,7 @@ export interface AuthState {
   user: User;
 }
 
-// DATA AWALNYA KITA BIKIN KOSONG/ ATAU SECARA DEFAULT KOSONG a
+// DATA AWALNYA KITA BIKIN KOSONG/ ATAU SECARA DEFAULT KOSONG 
 const initialState: AuthState = {
   user: {
     fullName: "",

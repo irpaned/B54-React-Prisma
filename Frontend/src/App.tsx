@@ -16,6 +16,7 @@ import { useStatStyles } from "@chakra-ui/react"
 
 function App() { 
   const [isLoading, setIsLoading] = useState<Boolean>(true)
+  // bagian dari redux
   const dispatch = useDispatch()
   // ------ INI BERHUBUNGAN DENGAN PRIVATE ROUTE ---------
   const currentUser = useSelector((state : RootState) => state.auth.user);

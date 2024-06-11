@@ -5,6 +5,7 @@ import { CreateThreadDTO, UpdateThreadDTO } from "../dto/thread-dto";
 import { createThreadSchema } from "../validators/thread";
 import { error } from "console";
 import { v2 as cloudinary } from "cloudinary";
+import thread from "../controllers/thread";
 
     const prisma = new PrismaClient();
 
@@ -52,6 +53,8 @@ import { v2 as cloudinary } from "cloudinary";
       
           return await prisma.thread.create({
             data: { ...dto, image : upload.secure_url },
+
+            
           });
         } catch (error) {
           throw new String(error);
@@ -84,8 +87,7 @@ import { v2 as cloudinary } from "cloudinary";
             throw new String(error);
        }
        
-        
-
+    
 
     };  
 
@@ -101,7 +103,6 @@ import { v2 as cloudinary } from "cloudinary";
         
     }
     
-
 
 export default { find, findOne, create, update, remove};
 

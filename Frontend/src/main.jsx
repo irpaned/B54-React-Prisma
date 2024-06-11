@@ -6,20 +6,23 @@ import { BrowserRouter as Router} from 'react-router-dom'
 import { theme } from './libraries/chakra-theme'
 import {Provider as ReduxProvider} from "react-redux"
 import { store } from './redux/store'
-// import "./index.css"
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
-
+// ini bagian dari Tanstack
+const client = new QueryClient()
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      <Router>
-        <ChakraProvider theme={theme}>
-          <App/>
-        </ChakraProvider> 
-      </Router>
-    </ReduxProvider> 
+    <QueryClientProvider client={client}>
+      <ReduxProvider store={store}>
+        <Router>
+          <ChakraProvider theme={theme}>
+            <App/>
+          </ChakraProvider> 
+        </Router>
+      </ReduxProvider> 
+    </QueryClientProvider>
   </React.StrictMode>
 )
 
