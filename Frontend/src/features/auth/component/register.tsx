@@ -64,7 +64,7 @@ export function RegisterForm(props : RegisterFormProps) {
     color="white">Create</Button>
       <Flex>
         <Text color="white">Already have account?</Text>
-        <Link href='http://localhost:5173/login' color="brand.900" ml="5px">Login</Link>
+        <Link href='http://localhost:5173/auth/login' color="brand.900" ml="5px">Login</Link>
       </Flex>
       
     </Box>

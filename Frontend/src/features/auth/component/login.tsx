@@ -12,13 +12,12 @@ export function LoginForm(props : LoginFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
     <Box m="auto" w="450px" p="10px 10px 10px 10px" mt="150px">
-      {/* <Icon fontSize="150px" color="brand.900" as={SiAnimalplanet}/> */}
       <Heading fontSize="50px" color="brand.900" >Circle</Heading>
       <Heading size="lg" mb="15px" color="brand.800">Login to Circle</Heading>
 
         <Input 
         {...register("email")}
-        placeholder='Email/Username' 
+        placeholder='Email' 
         size='md' 
         mb="7px"
         borderColor="white" 
@@ -44,7 +43,7 @@ export function LoginForm(props : LoginFormProps) {
     </Flex>
 
     <Button 
-    isDisabled={!!(errors.email?.message || errors.password?.message)}
+    isDisabled={!!(errors.email?.message || errors.password?.message)} // ini agar buttonnya gabisa di click ketika email dan password yg di isi tidak lolos validasi
     type='submit'
     w="100%" bg="brand.900" 
     borderRadius="20px" 
@@ -52,7 +51,7 @@ export function LoginForm(props : LoginFormProps) {
     color="white">Login</Button>
       <Flex>
         <Text color="white">Don't have an account yet?</Text>
-        <Link href='http://localhost:5173/create' color="brand.900" ml="5px">Create Account</Link>
+        <Link href='http://localhost:5173/auth/register' color="brand.900" ml="5px">Create Account</Link>
       </Flex>
       
     </Box>
@@ -60,7 +59,4 @@ export function LoginForm(props : LoginFormProps) {
   )
 }
 
-function toast(arg0: { title: string; status: string; duration: number; isClosable: boolean; }) {
-  throw new Error('Function not implemented.');
-}
 

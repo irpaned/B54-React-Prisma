@@ -3,14 +3,16 @@ import { UserJWTPayload } from "../types/auth";
 
 const prisma = new PrismaClient();
 
+            //  masukkan ke parameter (query string step 2)
 async function find(search: string) {
   try {
     return await prisma.user.findMany({
+     //  masukkan bagian yg mau dijadikan untuk pencarian (query string step 3)
       where: {
         userName: {
-          contains: search,
-          mode: "insensitive",
-        },
+          contains: search, // contains disini berfungsi untuk mencari semua user yang memiliki nama yg sama/mirip
+          mode: "insensitive", // ini berfungsi agar ukuran font besar kecilnya ga ngaruh, jadi misalkan carinya pakai huruf besar semua, contoh : IRFAN, ini ga masalah
+        }
       },
     });
   } catch (error) {

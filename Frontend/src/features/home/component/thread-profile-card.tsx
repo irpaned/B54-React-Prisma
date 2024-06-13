@@ -3,18 +3,18 @@ import React from 'react';
 import { BiChat, BiShare } from 'react-icons/bi';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaImage, FaRegHeart } from "react-icons/fa";
-import { ThreadEntity } from "../entities/thread-entity";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { BsThreeDots } from "react-icons/bs";
 import { MdOutlineModeEdit } from "react-icons/md";
+import { ThreadProfileEntity } from '../entities/thread-profile-entity';
 
 
 interface ThreadCardProps extends BoxProps {
-    thread: ThreadEntity; 
+    thread: ThreadProfileEntity; 
     
   }
 
-export function ThreadCard({ thread }: ThreadCardProps) {
+export function ThreadProfileCard({ thread }: ThreadCardProps) {
 
     const BoxCSS = {
         border: "1px solid rgb(47, 51, 54)",
@@ -30,6 +30,7 @@ export function ThreadCard({ thread }: ThreadCardProps) {
   
         
         <Box sx={BoxCSS}>
+        {/* <Text hidden>{thread?.user?.id}</Text> */}
                 <Card maxW='100%' bg="black" color="white" padding="0 0 0 0">
                     <CardHeader padding="0 0 0 0">
                     

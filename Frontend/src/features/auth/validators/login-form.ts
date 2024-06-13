@@ -1,7 +1,7 @@
 import { z } from "zod";
 
  // set up zod
- export const LoginSchema = z.object({
+ export const LoginSchemaZod = z.object({
   email : z
   .string()
   .email(),

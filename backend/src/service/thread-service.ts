@@ -2,16 +2,27 @@
 
 import { PrismaClient } from "@prisma/client";
 import { CreateThreadDTO, UpdateThreadDTO } from "../dto/thread-dto";
-import { createThreadSchema } from "../validators/thread";
+import { createThreadSchemaJoi } from "../validators/thread-schema";
 import { error } from "console";
 import { v2 as cloudinary } from "cloudinary";
-import thread from "../controllers/thread";
+import thread from "../controllers/thread-controller";
 
     const prisma = new PrismaClient();
 
     async function find() {
     try {
-        return await prisma.thread.findMany();
+        return await prisma.thread.findMany({
+            // include untuk membuka relasi (menggunakan relasi user step 1)
+            include : {
+                user : {
+                   select : {
+                        fullName : true,
+                        photoProfile : true,
+                        userName : true,
+                    }
+                }
+            }
+        });
     }   catch (error) {
         return error;
         }
@@ -32,10 +43,25 @@ import thread from "../controllers/thread";
         }
 
 
-    async function create(dto: CreateThreadDTO) {
+        async function findManyProfile( userId : number ) {
+          try {
+             const thread = await prisma.thread.findMany({
+                  where: { userId },
+              });
+  
+              if(!thread) throw new String("Thread not found!");;
+  
+              return thread;
+          }   catch (error) {
+              throw new String(error);
+              }
+          }
+
+                                            // 👇 bikin parameter, kenapa userId bukan pakai user? karena ada hubungannya dengan data yg ada prisma (menggunakan relasi user step 2)
+    async function create(dto: CreateThreadDTO, userId : number) {
         try {
         //   validasi menggunakan joi
-          const validate = createThreadSchema.validate(dto);
+          const validate = createThreadSchemaJoi.validate(dto);
       
           if (validate.error) {
             throw new String(validate.error.message);
@@ -47,12 +73,15 @@ import thread from "../controllers/thread";
             api_secret: process.env.CLOUDINARY_API_SECRET,
           });
       
+        //   ini mksdnya di upload di folder b54circle yg ada di cloudinary
           const upload = await cloudinary.uploader.upload(dto.image, {
             upload_preset: "b54circle",
           });
       
+        //   ini memasukkan datanya ke prisma di table thread
           return await prisma.thread.create({
-            data: { ...dto, image : upload.secure_url },
+            //              👇parameter passing disini (relasi step 3)
+            data: { ...dto, userId, image : upload.secure_url },
 
             
           });
@@ -104,7 +133,7 @@ import thread from "../controllers/thread";
     }
     
 
-export default { find, findOne, create, update, remove};
+export default { find, findOne, create, update, remove, findManyProfile};
 
 
 

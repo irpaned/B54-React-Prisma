@@ -2,10 +2,16 @@ import { Card, CardHeader, CardBody, CardFooter, Text, Heading, Stack, StackDivi
 import { color } from 'framer-motion'
 import React, { useState } from 'react'
 import { BiGame } from 'react-icons/bi'
+import { useSelector } from 'react-redux'
+import { RootState } from '../redux/store'
 
 export function RightBar() {
 
   const [isFollowed, setIsFollowed] = useState<boolean>(true)
+
+  // coba redux
+  const currentUser = useSelector((state : RootState) => state.auth.user);
+    console.log(currentUser);
 
   const buttonFollow = {
     
@@ -38,7 +44,7 @@ export function RightBar() {
   }
 
   return (
-<Box bg="black" w='400px' h="3000" color="white" p="20px 15px 0 20px" m={0}>
+<Box bg="black" w='400px' h="100%" color="white" p="20px 15px 0 20px" m={0}>
   <Card bg="black" color="white" border="1px solid rgb(47, 51, 54)" borderRadius="20px">
    
     <CardHeader>
@@ -51,7 +57,7 @@ export function RightBar() {
       </Box>
 
       <Box width="100&" h="65px" display="flex">
-      <Avatar boxSize='4em' src='https://bit.ly/dan-abramov' position="relative" left="20px" bottom="35px" border="4px solid black" />
+      <Avatar boxSize='4em' bg={"grey"} src={currentUser.photoProfile} position="relative" left="20px" bottom="35px" border="4px solid black" />
       <Spacer></Spacer>
       <Button color="white" variant='outline' size='sm' borderRadius="20px" mt="10px">
         Edit Profile
@@ -60,13 +66,13 @@ export function RightBar() {
       
       <Box marginTop="-5">
             <Heading size='lg'>
-              Kevin bin Joko
+            {currentUser.fullName}
             </Heading>
             <Text fontSize='md' color="grey">
-              @kevin
+              @{currentUser.userName}
             </Text>
             <Text>
-              I am a Fullstack Developer
+            {currentUser.bio}
             </Text>
             <Box display="flex">
               <Text marginRight="4px">152</Text>

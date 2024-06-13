@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import cors from "cors";
 import express, { Request, Response } from "express";
-import ThreadController from "./controllers/thread"
-import UserController from "./controllers/user"
-import AuthController from "./controllers/auth"
+import ThreadController from "./controllers/thread-controller"
+import UserController from "./controllers/user-controller"
+import AuthController from "./controllers/auth-controller"
 import dotenv from "dotenv"
 import { upload } from "./middlewares/upload-file";
 import { authenticate } from "./middlewares/authenticate";
@@ -33,6 +33,7 @@ dotenv.config()
 
     routerv1.get("/threads", authenticate, ThreadController.find);
     routerv1.get("/threads/:id", authenticate, ThreadController.findOne);
+    routerv1.get("/threads/profile/:id", authenticate, ThreadController.findManyProfile);
     routerv1.delete("/threads/:id", authenticate, ThreadController.remove)
     routerv1.post("/threads", authenticate, upload.single("image"), ThreadController.create);
     routerv1.patch("/threads/:id", authenticate, ThreadController.update);

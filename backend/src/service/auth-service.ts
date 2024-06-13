@@ -33,12 +33,13 @@ import { error } from "console";
 
            if(!isValidPassword) throw new Error ("User not found!")
 
-
+            // ini agar ketika kita find user
             delete user.password
 
             const jwtSecret = process.env.JWT_SECRET;
             
            // jangan masukkan data2 yg sensitif di jwt
+        //    membuat token dari data user
            const token = jwt.sign(user, jwtSecret)
 
             return { token, user }
@@ -50,7 +51,7 @@ import { error } from "console";
 
     async function register(dto : registerDTO) {
         try {
-            // 1. validasi menggunakan joi
+            // 1. validasi menggunakan joi, apakah sudah sesuai dengan DTO yg kita buat
            const validate = registerSchema.validate(dto) 
 
            // 2. setelah itu kita hashed
@@ -71,27 +72,6 @@ import { error } from "console";
         }
         
     }
-
-    // check ga butuh DTO
-   
-
-    // async function create(dto : registerDTO) {
-    //     try {
-    //         // validasi menggunakan joi
-    //        const validate = createThreadSchema.validate(dto) 
-
-    //        if(validate.error) {
-    //         return validate.error.details
-    //        }
-
-    //         return await prisma.thread.create({
-    //             data: { ...dto  },
-    //         });
-    //     } catch (error) {
-    //         return error
-    //     }
-        
-    // }
 
 
 export default { login, register};

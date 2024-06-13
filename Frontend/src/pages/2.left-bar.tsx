@@ -49,7 +49,7 @@ export function LeftBar() {
   return (
     <>
     
-        <Box bg="black" w='400px' h="3000" color="white" p="20px 0 0 150px" m={0}>
+        <Box bg="black" w='400px' h="100%" color="white" p="20px 0 0 150px" m={0}>
 
         <Heading as="h1" sx={HeadingCss}>
             Circle
@@ -58,14 +58,14 @@ export function LeftBar() {
         <Box mt="5">
           <Flex sx={CssDivFlex}>
             <HStack>
-              <Link href="http://localhost:5173/login"><Icon sx={IconCss} as={BiSolidHomeSmile}/></Link>
-              <Link href="http://localhost:5173/login" style={{fontSize: 20}} sx={LinkCss} >Home</Link>
+              <Link href="http://localhost:5173/home"><Icon sx={IconCss} as={BiSolidHomeSmile}/></Link>
+              <Link href="http://localhost:5173/home" style={{fontSize: 20}} sx={LinkCss} >Home</Link>
             </HStack>
           </Flex>
           <Flex sx={CssDivFlex}>
           <HStack>
-              <a href="#"><Icon sx={IconCss} as={IoSearch}/></a>
-              <a style={{fontSize: 20}} href='#'>Search</a>
+              <a href='http://localhost:5173/search'><Icon sx={IconCss} as={IoSearch}/></a>
+              <a href='http://localhost:5173/search' style={{fontSize: 20}} >Search</a>
             </HStack>
           </Flex>
           <Flex sx={CssDivFlex}>
@@ -76,8 +76,8 @@ export function LeftBar() {
           </Flex>
           <Flex sx={CssDivFlex}>
           <HStack>
-              <Icon sx={IconCss} as={CgProfile}/>
-              <a style={{fontSize: 20}} href='#'>Profile</a>
+              <Link href='http://localhost:5173/profile'><Icon sx={IconCss} as={CgProfile}/></Link>
+              <Link href='http://localhost:5173/profile' style={{fontSize: 20}} sx={LinkCss} >Profile</Link>
             </HStack>
           </Flex>
         </Box>

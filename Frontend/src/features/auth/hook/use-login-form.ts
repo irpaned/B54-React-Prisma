@@ -6,8 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../../libraries/api';
 import { SET_USER } from '../../../redux/slices/auth';
-import { LoginForm } from "../types/login-form";
-import { LoginSchema } from "../validators/login-form";
+import { LoginType } from "../types/login-type";
+import {  LoginSchemaZod } from "../validators/login-form";
 
 
 export const useLoginForm = () => {
@@ -21,16 +21,12 @@ export const useLoginForm = () => {
   const navigate = useNavigate()
 
   // React hook form👇
-  const { 
-    register, 
-    handleSubmit, 
-    formState : {errors} } 
-    = useForm<LoginForm>({
+  const { register,  handleSubmit, formState : {errors} } = useForm<LoginType>({
       mode : 'onChange',
-      resolver : zodResolver(LoginSchema)
+      resolver : zodResolver(LoginSchemaZod)
   })
 
-  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+  const onSubmit: SubmitHandler<LoginType> = async (data) => {
     try {      
       const response = await api.post("/auth/login", data)
       console.log("response" ,response.data);
@@ -48,7 +44,7 @@ export const useLoginForm = () => {
           duration: 3000,
           isClosable: true,
         })
-        navigate("/test-redux") // ini nanti ganti ke profile/home
+        navigate("/home") // navigate : berfungsi ketika sudah log in akan langsung di arahkan ke halaman home
       }
     } catch (error) {
       toast({
@@ -75,68 +71,3 @@ export const useLoginForm = () => {
 
 }
 
-
-// import { api } from '../../../libraries/api';
-// import { SET_USER } from '../../../redux/slices/auth';
-// import { useToast } from "@chakra-ui/react";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { SubmitHandler, useForm } from "react-hook-form";
-// import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { LoginForm } from "../types/login-form";
-// import { LoginSchema } from "../validators/login-form";
-// import React from 'react';
-
-// export const useLoginForm = () => {
-//   const [show, setShow] = React.useState(false)
-//   const handleClick = () => setShow(!show)
-
-//   const toast = useToast();
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm<LoginForm>({
-//     mode: "onChange",
-//     resolver: zodResolver(LoginSchema),
-//   });
-
-//   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
-//     try {
-//       const response = await api.post("/auth/login", data);
-//       const token = response.data.token;
-//       const user = response.data.user;
-//       if (token) localStorage.setItem("token", response.data.token);
-//       if (user) {
-//         dispatch(SET_USER(user));
-//         toast({
-//           title: "Login success!",
-//           status: "success",
-//           duration: 3000,
-//           isClosable: true,
-//         });
-//         navigate("/");
-//       }
-//     } catch (error) {
-//       toast({
-//         title: "Email / password is wrong!",
-//         status: "error",
-//         duration: 3000,
-//         isClosable: true,
-//       });
-//     }
-//   };
-
-//   return {
-//     register,
-//     handleSubmit,
-//     onSubmit,
-//     errors,
-//     handleClick,
-//     show, 
-//     setShow
-//   };
-// };
