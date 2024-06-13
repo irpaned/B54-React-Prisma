@@ -11,7 +11,7 @@ import { authenticate } from "./middlewares/authenticate";
 dotenv.config()
 
     const app = express();
-    const port = 5000;
+    const port = process.env.PORT || 5000;
     const routerv1 = express.Router();
     const routerv2 = express.Router();
     const prisma = new PrismaClient()
