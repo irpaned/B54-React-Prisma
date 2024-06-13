@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 // import RootLayout from "./layouts/RootLayout"
 import { useDispatch, useSelector } from "react-redux"
 import { Navigate, Outlet, Route, Routes } from "react-router-dom"
 import Home from "./layouts/home"
 import Profile from "./layouts/profile"
+import Search from "./layouts/search"
 import { api } from "./libraries/api"
 import { Dashboard } from "./pages/5.dashboard"
 import { Login } from "./pages/6.login"
 import { Register } from "./pages/7.register"
 import { Test } from "./pages/test-api"
 import { TestRedux } from "./pages/test-redux"
-import { RootState } from "./redux/store"
 import { SET_USER } from "./redux/slices/auth"
-import { useStatStyles } from "@chakra-ui/react"
-import Search from "./layouts/search"
+import { RootState } from "./redux/store"
 
 
 function App() { 
@@ -65,19 +64,17 @@ function App() {
   return (
     
         <Routes>
-          <Route path="/home" element={<Home/>}/> 
-          <Route path="/profile" element={<Profile/>}/> 
           <Route path="/auth/login" element={<Login/>}/>
-          <Route path="/test" element={<Test/>}/>
           <Route path="/auth/register" element={<Register/>}/>
+          <Route path="/test" element={<Test/>}/>
+          <Route path="/test-redux" element={<TestRedux/>}/> 
 
 
 
           <Route  element={<PrivateRoute/>}>
-            <Route path="/home" element={<Home/>}/> 
+            <Route path="/" element={<Home/>}/> 
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/search" element={<Search/>}/>
-            <Route path="/test-redux" element={<TestRedux/>}/> 
             <Route path="/dashboard" element={<Dashboard/>}/> 
           </Route>
         </Routes>
