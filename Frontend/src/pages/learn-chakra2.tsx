@@ -1,5 +1,3 @@
-import React from 'react'
-import { Navbar } from '../components/navbar'
 import { Box, SimpleGrid } from '@chakra-ui/react'
 
 export function LearnChakra2() {

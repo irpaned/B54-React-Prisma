@@ -1,11 +1,10 @@
-import { Box, Button, Container, Flex, Heading, HStack, Icon, Link, Spacer, Text, textDecoration } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, Flex, Heading, HStack, Icon, Link } from '@chakra-ui/react';
 
-import { FaRegHeart } from "react-icons/fa";
-import { IoSearch } from "react-icons/io5";
 import { BiSolidHomeSmile } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
-import { color } from 'framer-motion';
+import { FaRegHeart } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
+
 
 
 

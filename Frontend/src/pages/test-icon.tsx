@@ -1,5 +1,4 @@
-import React from 'react'
-import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
+import { AddIcon, PhoneIcon, WarningIcon } from '@chakra-ui/icons'
 
 export function TestIcon() {
   return (

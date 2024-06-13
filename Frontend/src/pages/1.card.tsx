@@ -1,16 +1,15 @@
 import { Avatar, Box, Button, Flex, Heading, HStack, Icon, Input, WrapItem } from '@chakra-ui/react';
-import React from 'react';
 import { FaImage } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import { ThreadCard } from '../features/home/component/thread-card';
 import { useHomePage } from '../hooks/use-home-page';
-import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 export function CardBeranda() { 
 
   const currentUser = useSelector((state : RootState) => state.auth.user);
   
-
+  
   const {
     threads,
     BoxCSS,

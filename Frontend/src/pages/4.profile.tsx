@@ -1,11 +1,9 @@
 import { Avatar, Box, Button, Flex, Heading, HStack, Icon, Image, Link, Spacer, Text } from '@chakra-ui/react';
-import React from 'react';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useSelector } from 'react-redux';
 import { ThreadCard } from '../features/home/component/thread-card';
 import { useProfilePage } from '../hooks/use-profile-page.tsx';
 import { RootState } from '../redux/store';
-import { useHomePage } from '../hooks/use-home-page.tsx';
 
 export function MyProfile() {
 

@@ -1,7 +1,5 @@
-import { Card, CardHeader, CardBody, CardFooter, Text, Heading, Stack, StackDivider, Box, Image, Avatar, AvatarBadge, Button, HStack, Spacer, border } from '@chakra-ui/react'
-import { color } from 'framer-motion'
-import React, { useState } from 'react'
-import { BiGame } from 'react-icons/bi'
+import { Avatar, Box, Button, Card, CardBody, CardHeader, HStack, Heading, Image, Spacer, Text } from '@chakra-ui/react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 

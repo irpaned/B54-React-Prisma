@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { Button } from "@chakra-ui/button";
-import React from "react";
-import { SET_USER } from "../redux/slices/auth";
 import { Box, Image, Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 
 export function TestRedux() {

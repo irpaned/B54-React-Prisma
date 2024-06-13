@@ -1,5 +1,5 @@
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input';
-import { Box, Button, Text, Image, HStack, Flex, Avatar } from '@chakra-ui/react';
+import { Box, Button, Text, HStack, Flex, Avatar } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { RiUserSearchLine } from "react-icons/ri";
 import { UserSearch } from '../features/search/types/search';

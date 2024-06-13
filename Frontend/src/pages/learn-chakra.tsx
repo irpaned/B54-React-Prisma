@@ -1,6 +1,4 @@
-import { Box, Button, Container, filter, Flex, Heading, HStack, Spacer, Text } from "@chakra-ui/react";
-import { color } from "framer-motion";
-import React from "react";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
 export function LearnChakra () {
     

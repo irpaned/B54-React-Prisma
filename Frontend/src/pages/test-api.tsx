@@ -1,5 +1,5 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { api } from '../libraries/api'
 
 
