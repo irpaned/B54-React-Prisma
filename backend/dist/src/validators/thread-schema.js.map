@@ -1,0 +1,1 @@
+{"version":3,"file":"thread-schema.js","sourceRoot":"","sources":["../../../src/validators/thread-schema.ts"],"names":[],"mappings":";AAAA,6DAA6D;;;;;;AAE7D,8CAAqB;AAGR,QAAA,qBAAqB,GAAG,aAAG,CAAC,MAAM,CAAkB;IAC7D,OAAO,EAAG,aAAG,CAAC,MAAM,EAAE,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,QAAQ,EAAE;IACjD,KAAK,EAAG,aAAG,CAAC,MAAM,EAAE;CAEvB,CAAC,CAAA"}

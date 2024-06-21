@@ -7,7 +7,7 @@
       "target": "es2015",
       "module": "CommonJS",
       "moduleResolution": "node",
-      "outDir": "./build",
+      "outDir": "./dist",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "allowSyntheticDefaultImports": true,
