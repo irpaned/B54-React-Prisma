@@ -50,7 +50,7 @@ export function LoginForm(props : LoginFormProps) {
     color="white">Login</Button>
       <Flex>
         <Text color="white">Don't have an account yet?</Text>
-        <Link href='https://b54-stage2-online-22xp4ydux-muhammad-irfans-projects-4b9f72d3.vercel.app/auth/register' color="brand.900" ml="5px">Create Account</Link>
+        <Link href='https://b54-stage2-online-xi.vercel.app/auth/register' color="brand.900" ml="5px">Create Account</Link>
       </Flex>
       
     </Box>
