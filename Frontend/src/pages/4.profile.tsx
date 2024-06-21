@@ -160,7 +160,7 @@ export function MyProfile() {
                   <Box display="flex">
                     <Text marginRight="4px">152</Text>
                     <Text marginRight="10px" color="grey">Following</Text>
-                    <Text marginRight="4px">964</Text>
+                    <Text marginRight="4px">219 rb</Text>
                     <Text color="grey">Followers</Text>
                   </Box>
               </Box>
