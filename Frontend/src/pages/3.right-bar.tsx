@@ -2,11 +2,9 @@ import { Avatar, Box, Button, Card, CardBody, CardHeader, FormControl, HStack, H
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
-
-import { useDebounce } from 'use-debounce'
 import { UserSearch } from '../features/search/types/search'
 import { api } from '../libraries/api'
-import { BiBorderRadius } from 'react-icons/bi'
+
 
 export function RightBar() {
 
@@ -18,8 +16,7 @@ export function RightBar() {
     console.log(currentUser);
 
   // BATAS TES
-  // const [searchInput, setSearchInput] = useState<string>("");
-    // const [debouncedSearchInput] = useDebounce(searchInput, 400); // selama 0.4 detik akan ngehit ke backend
+  
                                                            //  👇data awalnya kosong dan dibikin array
     const [searchData, setSearchData] = useState<UserSearch[]>([]);
   
@@ -30,8 +27,11 @@ export function RightBar() {
     async function getData() {
                         // 👇 ini get data user (get dan use data step  1)
       const response = await api.get("/users");
+      const shuffledData = response.data.sort(() => 0.5 - Math.random());
+      const limitedData = shuffledData.slice(0, 4);
     //   setelah di get datanya di masukkan ke searchData (get dan use data step  2)
-      setSearchData(response.data);
+      setSearchData(limitedData);
+      // setSearchData(response.data);
     }
   
     useEffect(() => {
@@ -182,7 +182,7 @@ export function RightBar() {
   </CardHeader>
 {searchData.map((irfan) => (
   
-    <CardBody paddingTop="0" >
+    <CardBody paddingTop="0" paddingBottom="2">
     <Box display="flex">
       <HStack>
         <Avatar boxSize='2.5em' src={irfan.photoProfile} name={irfan.fullName} />

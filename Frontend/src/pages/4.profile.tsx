@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, CardBody, Flex, Heading, HStack, Icon, Image, Input, Link, Menu, MenuButton, MenuItem, MenuList, Spacer, Text, Textarea } from '@chakra-ui/react';
+import { Avatar, Box, Button, Card, CardBody, Flex, Heading, HStack, Icon, Image, Input, Link, Spacer, Text, Textarea } from '@chakra-ui/react';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useSelector } from 'react-redux';
 import { ThreadCard} from '../features/home/component/thread-card';
@@ -12,8 +12,7 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  FormControl,
-  FormLabel,
+  FormControl
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useEditProfileForm } from '../features/profile/hooks/use-edit-profile.ts';
