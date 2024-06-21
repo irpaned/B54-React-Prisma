@@ -56,7 +56,7 @@ async function register(req: Request, res: Response)  {
           from: '"Circle" <muhammadirfan2823@gmail.com>', // sender address
           to: user.email, // list of receivers
           subject: "Verification Link", // Subject line
-          html: `<a href="${fullUrl}/api/v1/auth/verify-email?token=${token}">Klik untuk verifikasi email kamu!</a>`, // html body
+          html: `<a href="${fullUrl}/api/v1/auth/verify-email?token=${token}">Klik untuk verifikasi email!</a>`, // html body
         });
     
         console.log("Message sent: %s", info.messageId);
