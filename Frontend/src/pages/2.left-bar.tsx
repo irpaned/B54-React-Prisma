@@ -57,14 +57,14 @@ export function LeftBar() {
         <Box mt="5">
           <Flex sx={CssDivFlex}>
             <HStack>
-              <Link href="https://b54-stage2-online-22xp4ydux-muhammad-irfans-projects-4b9f72d3.vercel.app"><Icon sx={IconCss} as={BiSolidHomeSmile}/></Link>
-              <Link href="https://b54-stage2-online-22xp4ydux-muhammad-irfans-projects-4b9f72d3.vercel.app" style={{fontSize: 20}} sx={LinkCss} >Home</Link>
+              <Link href="https://b54-stage2-online-xi.vercel.app/"><Icon sx={IconCss} as={BiSolidHomeSmile}/></Link>
+              <Link href="https://b54-stage2-online-xi.vercel.app/" style={{fontSize: 20}} sx={LinkCss} >Home</Link>
             </HStack>
           </Flex>
           <Flex sx={CssDivFlex}>
           <HStack>
-              <a href='https://b54-stage2-online-22xp4ydux-muhammad-irfans-projects-4b9f72d3.vercel.app/search'><Icon sx={IconCss} as={IoSearch}/></a>
-              <a href='https://b54-stage2-online-22xp4ydux-muhammad-irfans-projects-4b9f72d3.vercel.app/search' style={{fontSize: 20}} >Search</a>
+              <a href='https://b54-stage2-online-xi.vercel.app/search'><Icon sx={IconCss} as={IoSearch}/></a>
+              <a href='https://b54-stage2-online-xi.vercel.app/search' style={{fontSize: 20}} >Search</a>
             </HStack>
           </Flex>
           <Flex sx={CssDivFlex}>
@@ -75,8 +75,8 @@ export function LeftBar() {
           </Flex>
           <Flex sx={CssDivFlex}>
           <HStack>
-              <Link href='https://b54-stage2-online-22xp4ydux-muhammad-irfans-projects-4b9f72d3.vercel.app/profile'><Icon sx={IconCss} as={CgProfile}/></Link>
-              <Link href='https://b54-stage2-online-22xp4ydux-muhammad-irfans-projects-4b9f72d3.vercel.app/profile' style={{fontSize: 20}} sx={LinkCss} >Profile</Link>
+              <Link href='https://b54-stage2-online-xi.vercel.app/profile'><Icon sx={IconCss} as={CgProfile}/></Link>
+              <Link href='https://b54-stage2-online-xi.vercel.app/profile' style={{fontSize: 20}} sx={LinkCss} >Profile</Link>
             </HStack>
           </Flex>
         </Box>
