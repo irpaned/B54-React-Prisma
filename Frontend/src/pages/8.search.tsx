@@ -30,8 +30,23 @@ export function SearchPage() {
       getData();
     }, [debouncedSearchInput]);
 
+    
+    const scrollbar = {
+      "overflow-x" : "hidden",
+      "::-webkit-scrollbar" : {
+        width : "10px"
+      },
+      "::-webkit-scrollbar-track" : {
+        border : "7px solid black"
+      },
+      "::-webkit-scrollbar-thumb" : {
+        background : "linear-gradient(transparent,green)",
+        borderRadius : "6px"
+      }
+    }
+
   return (
-    <Box w="600px" m='0' bg="black" h="700px"   border="1px solid rgb(47, 51, 54)" borderTop="none" padding="40px 10px 0px 10px" color="white" overflow="scroll">
+    <Box w="600px" m='0' bg="black" h="728px"   border="1px solid rgb(47, 51, 54)" borderTop="none" padding="40px 10px 0px 10px" color="white" overflow="scroll" sx={scrollbar}>
         {/* <Input   placeholder="Search your friend" size='md' />    */}
         <InputGroup mb="20px" >
             <InputLeftElement pointerEvents='none'>
@@ -49,7 +64,7 @@ export function SearchPage() {
             // baru kita pakai di sini dan lainnya (get dan use data step  4)
               name={irfan.fullName} 
               src={irfan.photoProfile} />
-            <Box w="436px">
+            <Box w="420px">
               <Text fontWeight={"bold"}>{irfan.fullName}</Text>
               <Text mt={"0px"} color={"gray"}>
                 @{irfan.userName}

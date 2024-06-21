@@ -1,15 +1,16 @@
 import { Request, Response } from "express";
-import ThreadService from "../service/thread-service"
-
-import {  CreateThreadDTO, UpdateThreadDTO } from "../dto/thread-dto";
-import path from "path";
+import ThreadService from "../service/thread-service";
 import { UserJWTPayload } from "../types/auth";
+import { redisClient } from "../libs/redis";
 
 
 
     async function find(req: Request, res: Response) {
     try {
         const threads = await ThreadService.find()
+        // SET REDIS (STEP 2)
+        // ini untuk memasukkan data threads ke redis
+        // await redisClient.set("THREADS_DATA", JSON.stringify(threads));
         return res.json(threads);
     }   catch (error) {
         res.status(500).json({ message : error.message })
@@ -54,6 +55,20 @@ import { UserJWTPayload } from "../types/auth";
 
 
     async function create(req: Request, res: Response)  {
+        // "multipart/form-data" : ini agar file gambar bisa menjadi file upload
+
+        /*  #swagger.requestBody = {
+                required: true,
+                content: {
+                    "multipart/form-data": {
+                        schema: {
+                        $ref: "#/components/schemas/CreateThreadDTO"
+                        }  
+                    }
+                }
+            } 
+        */
+        
         try {
             //              👇 ambil data dari authenticate ( menggunakan relasi user step 4)
             const user = res.locals.user as UserJWTPayload
@@ -61,6 +76,8 @@ import { UserJWTPayload } from "../types/auth";
                 ...req.body,
                 image: req.file? req.file.path : "",
             } 
+            // ini berfungsi untuk menghapus keys THREADS_DATA setiap ada yang post, bertujuan agar cache redis lebih update dengan data yg baru di post
+            // await redisClient.del("THREADS_DATA");
             //                                                      👇passing datanya disini(menggunakan relasi user step 5)         
             const createdThread = await ThreadService.create(body, user.id);
 
@@ -97,6 +114,8 @@ import { UserJWTPayload } from "../types/auth";
 
     }
 
+    
+
     async function remove (req: Request, res: Response) {
         try {
             const { id } = req.params;
@@ -120,5 +139,6 @@ import { UserJWTPayload } from "../types/auth";
         
     }
 
+    
 // di export untuk di panggil di index.ts (routing)
 export default {find, findOne, create, update, remove, findManyProfile} ;

@@ -8,7 +8,16 @@ import jwt  from "jsonwebtoken";
 
 //  next untuk melanjutkan fungsi selanjutnya
 export function authenticate(req: Request, res: Response, next: NextFunction) {
-    // untuk ambil data dari tokennya   
+  // 👇 ini bukan sembarangan command, ini berguna
+  /* 
+  #swagger.security = [{
+            "bearerAuth": []
+    }] 
+  */
+  
+  
+  
+  // untuk ambil data dari tokennya   
     const authorizationHeader = req.headers.authorization; // output : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJpcmZhbkBnbWFpbC5jb20iLCJ1c2VyTmFtZSI6ImlyZmFuIiwiZnVsbE5hbWUiOiJNdWhhbW1hZCBJcmZhbiIsInBob3RvUHJvZmlsZSI6bnVsbCwiYmlvIjpudWxsLCJjcmVhdGVkQXQiOiIyMDI0LTA2LTAyVDEwOjAyOjM5LjMyMloiLCJ1cGRhdGVBdCI6IjIwMjQtMDYtMDJUMTA6MDI6MzkuMzIyWiIsImlhdCI6MTcxNzMyMjY1MH0.PBPcGqNTW5T2eEMqlhETM2yVWMGT6SPxU2Uh1xAIAm8
 
     // jika authorizationHeader gaada || atau authorizationHeader-nya tidak di awali "Bearer" 👇

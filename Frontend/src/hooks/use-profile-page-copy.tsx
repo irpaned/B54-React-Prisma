@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { ThreadProfileEntity } from '../features/profile/entities/thread-profile-entity';
+import { ThreadProfileEntity } from '../features/home/entities/thread-profile-entity';
 import { api } from "../libraries/api";
 
 export const useProfilePage = () => {
@@ -11,8 +11,8 @@ export const useProfilePage = () => {
         
     
         // 👇 (TanStack query untuk get data step 2)
-      async function getThreads() {
-        const response = await api.get("/threads/profile/:id", {
+      async function getThreads(userId : any) {
+        const response = await api.get(`/api/threads/:id${userId}`, {
           headers : {
             Authorization : `Bearer ${localStorage.token}`
           }

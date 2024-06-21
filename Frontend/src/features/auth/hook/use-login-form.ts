@@ -44,7 +44,7 @@ export const useLoginForm = () => {
           duration: 3000,
           isClosable: true,
         })
-        navigate("/home") // navigate : berfungsi ketika sudah log in akan langsung di arahkan ke halaman home
+        navigate("/") // navigate : berfungsi ketika sudah log in akan langsung di arahkan ke halaman home
       }
     } catch (error) {
       toast({

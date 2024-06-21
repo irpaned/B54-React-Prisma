@@ -57,8 +57,8 @@ export function LeftBar() {
         <Box mt="5">
           <Flex sx={CssDivFlex}>
             <HStack>
-              <Link href="http://localhost:5173/home"><Icon sx={IconCss} as={BiSolidHomeSmile}/></Link>
-              <Link href="http://localhost:5173/home" style={{fontSize: 20}} sx={LinkCss} >Home</Link>
+              <Link href="http://localhost:5173/"><Icon sx={IconCss} as={BiSolidHomeSmile}/></Link>
+              <Link href="http://localhost:5173/" style={{fontSize: 20}} sx={LinkCss} >Home</Link>
             </HStack>
           </Flex>
           <Flex sx={CssDivFlex}>

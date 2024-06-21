@@ -1,9 +1,7 @@
-import { Avatar, Box, Button, Card, CardBody, Flex, Heading, HStack, Icon, Image, Input, Link, Menu, MenuButton, MenuItem, MenuList, Spacer, Text, Textarea } from '@chakra-ui/react';
+import { Avatar, Box, Button, Card, CardBody, Flex, Heading, HStack, Icon, Image, Input, Link, Spacer, Text, Textarea } from '@chakra-ui/react';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useSelector } from 'react-redux';
-import { ThreadCard} from '../features/home/component/thread-card';
-import { useHomePage } from '../hooks/use-home-page';
-import { RootState } from '../redux/store';
+import { RootState } from '../../../redux/store';
 import {
   Modal,
   ModalOverlay,
@@ -16,30 +14,24 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { useEditProfileForm } from '../features/profile/hooks/use-edit-profile.ts';
+import { EditProfile } from '../../../hooks/use-edit-profile'
 
-export function MyProfile() {
 
-  // ganti hooks dari luar
-  const {errors, handleSubmit, onSubmit, register} = useEditProfileForm()
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-    const {
-    threads
-    } = useHomePage()
 
-  const currentUser = useSelector((state : RootState) => state.auth.user);
-  console.log(currentUser);
+export function Profile () {
 
-  const BoxCSS = {
-    border: "1px solid rgb(47, 51, 54)",
-    borderTop: "none",
-    borderRight: "none",
-    borderLeft: "none",
-    p: "20px 15px 20px 15px"
-  }
+    //  ini sudah betul
+const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const BoxCSSTop = {
+//  ini sudah betul
+ const {handleSubmit, onSubmit, register, errors} = EditProfile()
+
+// ini dari redux
+const currentUser = useSelector((state : RootState) => state.auth.user);
+console.log(currentUser);
+
+const BoxCSSTop = {
     border: "1px solid rgb(47, 51, 54)",
     borderTop: "none",
     borderRight: "none",
@@ -49,15 +41,9 @@ export function MyProfile() {
   }
 
 
-  return (
-
-    
-    <Box w="600px" m='0' bg="black" h="700px"   border="1px solid rgb(47, 51, 54)"  borderTop="none" paddingTop="0px"  color="white" overflow="scroll">
-
-      
-        <Box sx={BoxCSS} >
-          {/* TOP */}
-          <Box sx={BoxCSSTop}>
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>        
+    <Box sx={BoxCSSTop}>
           <Flex h="60px">
             <HStack>
             <Link mt="0" href="http://localhost:5173/home" fontSize="45px"><Icon mt="5" as={IoIosArrowRoundBack}></Icon></Link>
@@ -86,7 +72,7 @@ export function MyProfile() {
               Edit Profile
               </Button>
               
-              <form onSubmit={handleSubmit(onSubmit)}>
+              
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent color={'white'} bg={'black'} boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"} borderRadius = '20px'>
@@ -129,7 +115,7 @@ export function MyProfile() {
                     bg={'brand.900'} 
                     mr={3} 
                     type='submit'
-                    // onClick={onClose} 
+                    onClick={onClose} 
                     color={'white'}  _hover={{
                       color: "brand.800",
                       bg : '#039B1C'
@@ -142,7 +128,7 @@ export function MyProfile() {
                   </ModalFooter>
                 </ModalContent>
               </Modal>
-              </form>
+              
               
           </Box>
          
@@ -164,22 +150,8 @@ export function MyProfile() {
                     <Text color="grey">Followers</Text>
                   </Box>
               </Box>
-          </Box>
-          {/*top*/} 
-             
-      </Box> 
-      <Box >
-
-        {/* tanStack */}
-        {/* {threads?.map((thread: ThreadEntity) => <ThreadCard thread={thread} />)} */}
-        {threads?.map((thread) => <ThreadCard thread={thread} />)}
-
-        {/* Redux */}
-        {/* {<ThreadCard/>} */}
-      </Box> 
+        </Box>
     </Box>
-    </Box>
-    
-  )
+    </form>
+    )
 }
-

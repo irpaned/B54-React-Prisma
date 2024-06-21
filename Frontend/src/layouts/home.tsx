@@ -11,7 +11,7 @@ export default function Home() {
   return (
     
 
-      <Flex>
+      <Flex >
           <LeftBar/> 
           <CardBeranda/>
           <RightBar/>

@@ -9,6 +9,7 @@ import { api } from "../libraries/api";
 
 export const useHomePage = () => {
 
+    
     // 👇 Menggunakan TanStack query (TanStack query untuk get data step 1)
     const { data : threads, refetch } = useQuery<ThreadEntity[]>({
         queryKey : ["threads"], 

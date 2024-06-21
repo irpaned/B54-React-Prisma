@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface User {
+  id: any;
   userName: string;
   fullName: string;
   email: string;
@@ -15,6 +16,7 @@ export interface AuthState {
 // DATA AWALNYA KITA BIKIN KOSONG/ ATAU SECARA DEFAULT KOSONG 
 const initialState: AuthState = {
   user: {
+    id : 0,
     fullName: "",
     email: "",
     userName: "",

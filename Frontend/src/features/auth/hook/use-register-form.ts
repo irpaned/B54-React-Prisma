@@ -7,10 +7,12 @@ import { RegisterForm } from '../types/register-form'
 import { RegisterSchema } from '../validators/register-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 export const useRegisterForm = () => {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+    const navigate = useNavigate()
 
     // const toast = useToast()
     // const dispatch = useDispatch()
@@ -46,6 +48,7 @@ export const useRegisterForm = () => {
             if(token) {
               localStorage.setItem("token", token)
             }
+            navigate("/auth/login")
       
           } catch (error) {
             console.log(error);

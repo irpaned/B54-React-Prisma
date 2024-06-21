@@ -12,4 +12,11 @@ export type registerDTO = {
 
 };
 
+export type editProfileDTO = {
+    userName : string,
+    fullName : string,
+    bio : string
+
+};
+
 

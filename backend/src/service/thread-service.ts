@@ -6,6 +6,7 @@ import { createThreadSchemaJoi } from "../validators/thread-schema";
 import { error } from "console";
 import { v2 as cloudinary } from "cloudinary";
 import thread from "../controllers/thread-controller";
+import { editProfileDTO } from "../dto/auth-dto";
 
     const prisma = new PrismaClient();
 
@@ -92,33 +93,32 @@ import thread from "../controllers/thread-controller";
 
     async function update(id : number, dto : UpdateThreadDTO) {
        try {
+       
         const thread = await prisma.thread.findFirst({
-            where: { id : Number (id) },
-        });
-
+          where: { id : Number (id) },
+      });
 
         // ini 👇 cara bacanya : kalau misalkan gaada berarti gausah di update, kalau ada baru diupdate 
         if (dto.content) { 
             thread.content = dto.content;
         }
 
-
         if (dto.image) { 
             thread.image = dto.image;
         }
 
-        return await prisma.thread.update({
-            where : { id : Number(id) },
-            data : { ...thread }
-        }); 
+      return await prisma.thread.update({
+        where : { id : Number(id) },
+        data : { ...thread }
+      }); 
 
        } catch (error) {
             throw new String(error);
        }
        
-    
-
     };  
+
+    
 
     async function remove (id : number) {
         try {

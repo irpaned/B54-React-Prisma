@@ -1,6 +1,5 @@
 import { Box, BoxProps, Button, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text } from '@chakra-ui/react'
-import React, { ChangeEvent, useState } from 'react'
-import { api } from '../../../libraries/api'
+
 import { useRegisterForm } from '../hook/use-register-form'
 
 
@@ -16,7 +15,7 @@ type RegisterForm = {
 
 export function RegisterForm(props : RegisterFormProps) {
   
-  const {handleClick, handleSubmit, setShow, show, errors, onSubmit, register} = useRegisterForm()
+  const {handleClick, handleSubmit, show, errors, onSubmit, register} = useRegisterForm()
   
 
 

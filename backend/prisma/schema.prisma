@@ -21,6 +21,7 @@ model User {
   password     String
   photoProfile String?
   bio          String?
+  isVerified   Boolean @default(false)
 
   threads Thread[]
   replies Reply[]
@@ -31,7 +32,6 @@ model User {
 
   createdAt DateTime @default(now())
   updateAt  DateTime @default(now()) @updatedAt
-
 
   @@map("user") // ganti nama table
 }
@@ -99,4 +99,21 @@ model Follow {
   updateAt  DateTime @default(now())
 
   @@map("follows")
+}
+
+model Verification {
+  id Int @id @default(autoincrement())
+
+  token String           @unique
+  type  VerificationType @default(EMAIL)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("verifications")
+}
+
+enum VerificationType {
+  FORGOT_PASSWORD
+  EMAIL
 }
