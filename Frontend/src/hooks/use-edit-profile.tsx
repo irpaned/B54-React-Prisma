@@ -8,6 +8,7 @@ import { EditProfileSchema } from '../features/profile/validators/edit-form';
 import { AxiosError } from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { useEffect } from 'react';
 
 
 export const EditProfile = () => {
@@ -18,10 +19,14 @@ export const EditProfile = () => {
             queryKey : ["user"], 
             queryFn : getUser})
         
-            async function getUser() {
-                const response = await api.get(`/user/${currentUser.id}`)
+        async function getUser() {
+            const response = await api.get(`/user/${currentUser.id}`)
                 return response.data
-              }
+        }
+
+        useEffect(() => {
+            getUser();
+          }, []);
 
     console.log(currentUser);
     
