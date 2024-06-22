@@ -1,0 +1,49 @@
+import { Box, BoxProps, Button, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text } from '@chakra-ui/react'
+
+import { useRegisterForm } from '../hook/use-register-form'
+
+
+interface ForgotFormProps extends BoxProps{}
+
+type ForgotForm = {
+  email : string
+}
+
+
+export function ForgotForm(props : ForgotFormProps) {
+  
+  const {handleClick, handleSubmit, show, errors, onSubmit, register} = useRegisterForm()
+  
+
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+    <Box m="auto" w="450px" p="10px 10px 10px 10px" mt="150px">
+      <Heading fontSize="50px" color="brand.900" >Circle</Heading>
+      <Heading size="lg" mb="15px" color="brand.800">Forgot Password</Heading>
+        <Input 
+        {...register("email")}
+        placeholder='Email' size='md' mt="7px" borderColor="white" color="white" />
+        <Text color={"red"}>{errors.email?.message}</Text>
+        <InputGroup size='md' mt="7px" mb="7px">
+    </InputGroup>
+    <Text color={"red"}>{errors.password?.message}</Text>
+    <Button 
+    isDisabled={!!(errors.email?.message || errors.password?.message)}
+    type='submit'
+    w="100%" 
+    bg="brand.900" 
+    borderRadius="20px" 
+    mt="7px"
+    mb="10px" 
+    color="white">Send Instruction</Button>
+      <Flex>
+        <Text color="white">Already have account?</Text>
+        <Link href='https://b54-stage2-online-xi.vercel.app/auth/login' color="brand.900" ml="5px">Login</Link>
+      </Flex>
+      
+    </Box>
+    </form>
+  )
+}
+

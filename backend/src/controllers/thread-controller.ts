@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import ThreadService from "../service/thread-service";
 import { UserJWTPayload } from "../types/auth";
 import { redisClient } from "../libs/redis";
+import { log } from "console";
 
 
 
@@ -40,9 +41,10 @@ import { redisClient } from "../libs/redis";
     async function findManyProfile (req: Request, res: Response) {
         
         try {
+            // const user = res.locals.user
             const { id } = req.params;
             const threads = await ThreadService.findManyProfile(Number(id))
-
+            
             if(!threads) {
                 return res.status(404).json({ message : "Thread not found" })
             }
@@ -83,7 +85,10 @@ import { redisClient } from "../libs/redis";
 
             res.status(201).json(createdThread);
         } catch (error) {
+            console.log(error);
           res.status(500).json({ message: error.message });
+          
+          
         }
     }
 

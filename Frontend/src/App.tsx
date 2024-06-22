@@ -13,6 +13,8 @@ import { Test } from "./pages/test-api"
 import { TestRedux } from "./pages/test-redux"
 import { SET_USER } from "./redux/slices/auth"
 import { RootState } from "./redux/store"
+import { Reset } from "./pages/9.reset-password"
+import { Forgot } from "./pages/10.forgot-password"
 
 
 function App() { 
@@ -66,6 +68,8 @@ function App() {
         <Routes>
           <Route path="/auth/login" element={<Login/>}/>
           <Route path="/auth/register" element={<Register/>}/>
+          <Route path="/auth/reset" element={<Reset/>}/>
+          <Route path="/auth/forgot" element={<Forgot/>}/>
           <Route path="/test" element={<Test/>}/>
           <Route path="/test-redux" element={<TestRedux/>}/> 
 

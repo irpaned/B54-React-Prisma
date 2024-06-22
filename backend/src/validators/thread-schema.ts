@@ -5,6 +5,6 @@ import { CreateThreadDTO } from "../dto/thread-dto"
 
 export const createThreadSchemaJoi = joi.object<CreateThreadDTO>({
     content : joi.string().min(1).max(255).required(),
-    image : joi.string()
+    image : joi.string().allow(null, '') // allow(null, '') : agar image boleh kosong dgn berupa string kosong
 
 }) 

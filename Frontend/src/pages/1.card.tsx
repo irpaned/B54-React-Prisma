@@ -59,16 +59,22 @@ export function CardBeranda() {
             {...register("content")}
             w="380px" placeholder='What is Happening?' border="none" color="white" />
       
-            <Icon color="brand.900" fontSize={25} as={FaImage}></Icon>
+            
+            <label htmlFor='fileupload'>
+              <Icon color="brand.900" fontSize={25} as={FaImage}></Icon>
+            </label>
 
             <Input 
             // (TanStack query  untuk post data step 2)
+            hidden
+            id='fileupload'
             {...register("image")}
             type="file" w="380px" border="none" color="white"></Input>
             <Button ml="5px" type='submit' sx={ButtonPost}>Post</Button>
             </form>
         </HStack>
     </Flex>
+   
     </Box>
           {threads?.map((thread) => <ThreadCard thread={thread} />)}
      </Box>     

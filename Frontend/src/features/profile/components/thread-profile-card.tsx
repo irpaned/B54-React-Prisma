@@ -95,11 +95,6 @@ export async function ThreadProfileCard({ thread }: ThreadCardProps) {
                                     </MenuItem>
                                 </MenuList>
                             </Menu>
-                            {/* <IconButton
-                                variant='ghost'
-                                color="grey"
-                                aria-label='See menu'
-                                icon={<BsThreeDotsVertical />} /> */}
                         </Flex>
 
                     </CardHeader>

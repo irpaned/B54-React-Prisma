@@ -1,15 +1,29 @@
-import {  Box } from '@chakra-ui/react';
+import {  Box, BoxProps, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { ThreadCard} from '../features/home/component/thread-card.tsx';
 import { Profile } from '../features/profile/components/my-profile.tsx';
 import { useHomePage } from '../hooks/use-home-page.tsx';
 
 import { EditProfile } from '../hooks/use-edit-profile.tsx';
+import { UserEntity } from '../features/home/entities/user-entity.ts';
+import { useProfilePage } from '../hooks/use-profile-page.tsx';
+import { ThreadProfileCard } from '../features/profile/components/thread-profile-card.tsx';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store.ts';
 
+
+
+interface ProfileCardProps extends BoxProps {
+  profile: UserEntity; 
+  
+}
 export function MyProfileTest() {
+
+  const currentUser = useSelector((state : RootState) => state.auth.user);
+    console.log(currentUser);
 
     const {
     threads
-    } = useHomePage()
+    } = useProfilePage(currentUser.id)
 
     const {user} = EditProfile()
 
@@ -19,8 +33,17 @@ export function MyProfileTest() {
     borderTop: "none",
     borderRight: "none",
     borderLeft: "none",
+    borderBottom: "none",
     p: "20px 15px 20px 15px"
   }
+
+  const TabCss = {
+    border: "1px solid rgb(47, 51, 54)",
+    borderTop: "none",
+    borderRight: "none",
+    borderLeft: "none",
+  }
+
 
 
   return (
@@ -32,17 +55,45 @@ export function MyProfileTest() {
       <Box sx={BoxProfile}>
 
         <Profile/>
-        {/* {user?.map((user) => <Profile user={user}/>)} */}
+        
 
-      <Box >
-
+        <Tabs mt={'0'} isFitted variant='enclosed'>
+  <TabList border={'none'} mb='1em'>
+    <Tab 
+    sx={TabCss}  
+    color={'white'}
+    _selected={{ 
+      border: "1px solid green",
+      borderTop: "none",
+      borderRight: "none",
+      borderLeft: "none" }}
+    >All Post</Tab>
+    <Tab 
+    sx={TabCss} 
+    color={'white'}
+     _selected={{ 
+      border: "1px solid green",
+      borderTop: "none",
+      borderRight: "none",
+      borderLeft: "none" }}
+    >Media</Tab>
+  </TabList>
+  <TabPanels>
+    <TabPanel>
+    <Box >
         {/* ini cara tanStack */}
         {threads?.map((thread) => <ThreadCard thread={thread} />)}
-
         {/* ini cara Redux */}
         {/* {<ThreadCard/>} */}
-
       </Box> 
+    </TabPanel>
+    <TabPanel>
+      <p>two!</p>
+    </TabPanel>
+  </TabPanels>
+</Tabs>
+      
+
     </Box>
     </Box>
     

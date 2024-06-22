@@ -43,7 +43,9 @@ export const useHomePage = () => {
       mutationFn: (newThread) => {
           const formData = new FormData();
           formData.append("content", newThread.content);
-          formData.append("image", newThread.image[0]);
+          if(newThread.image[0]) {
+            formData.append("image", newThread.image[0]);
+          }
           console.log(newThread);
           return api.post("/threads", formData, {
               headers : {

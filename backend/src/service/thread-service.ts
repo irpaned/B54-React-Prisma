@@ -48,6 +48,9 @@ import { editProfileDTO } from "../dto/auth-dto";
           try {
              const thread = await prisma.thread.findMany({
                   where: { userId },
+                  include : {
+                    user : true
+                  }
               });
   
               if(!thread) throw new String("Thread not found!");;
@@ -73,16 +76,21 @@ import { editProfileDTO } from "../dto/auth-dto";
             api_key: process.env.CLOUDINARY_API_KEY,
             api_secret: process.env.CLOUDINARY_API_SECRET,
           });
-      
+          
+          if(dto.image) {
+            const upload = await cloudinary.uploader.upload(dto.image, {
+              upload_preset: "b54circle",
+            });
+            dto.image= upload.secure_url
+          }
+
         //   ini mksdnya di upload di folder b54circle yg ada di cloudinary
-          const upload = await cloudinary.uploader.upload(dto.image, {
-            upload_preset: "b54circle",
-          });
+          
       
         //   ini memasukkan datanya ke prisma di table thread
           return await prisma.thread.create({
             //              👇parameter passing disini (relasi step 3)
-            data: { ...dto, userId, image : upload.secure_url },
+            data: { ...dto, userId },
 
             
           });

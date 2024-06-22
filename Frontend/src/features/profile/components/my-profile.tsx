@@ -11,7 +11,6 @@ import {
   ModalBody,
   ModalFooter,
   FormControl,
-  FormLabel,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { EditProfile } from '../../../hooks/use-edit-profile'
@@ -21,15 +20,22 @@ import { EditProfile } from '../../../hooks/use-edit-profile'
 
 export function Profile () {
 
+  // const editProfile = (event : any) => {
+  //   event.preventDefault()
+  //   console.log("menjalakan submit");
+    
+  // }
+
     //  ini sudah betul
 const { isOpen, onOpen, onClose } = useDisclosure();
 
-//  ini sudah betul
- const {handleSubmit, onSubmit, register, errors} = EditProfile()
-
-// ini dari redux
 const currentUser = useSelector((state : RootState) => state.auth.user);
 console.log(currentUser);
+//  ini sudah betul
+ const {handleSubmit, onSubmit, register, errors} = EditProfile(currentUser.id)
+
+// ini dari redux
+
 
 const BoxCSSTop = {
     border: "1px solid rgb(47, 51, 54)",
@@ -42,7 +48,7 @@ const BoxCSSTop = {
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>        
+                
     <Box sx={BoxCSSTop}>
           <Flex h="60px">
             <HStack>
@@ -74,11 +80,13 @@ const BoxCSSTop = {
               
               
               <Modal isOpen={isOpen} onClose={onClose}>
+
                 <ModalOverlay />
                 <ModalContent color={'white'} bg={'black'} boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"} borderRadius = '20px'>
                   <ModalHeader>Edit profile</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
+                  {/* <form onSubmit={editProfile}> */}
                     <Card bg="black" color="white"  borderRadius="20px">
                       <CardBody padding="0 0 0 0">
                         <Box w="100%" h="120px" borderRadius="10px" overflow="hidden">
@@ -107,6 +115,7 @@ const BoxCSSTop = {
                       {...register("bio")}
                       defaultValue={currentUser.bio} placeholder="Bio" height="30px" resize={'none'} />
                     </FormControl>
+                    {/* </form> */}
                   </ModalBody>
                   
                   <ModalFooter>
@@ -115,7 +124,7 @@ const BoxCSSTop = {
                     bg={'brand.900'} 
                     mr={3} 
                     type='submit'
-                    onClick={onClose} 
+                    onClick={handleSubmit(onSubmit)} 
                     color={'white'}  _hover={{
                       color: "brand.800",
                       bg : '#039B1C'
@@ -152,6 +161,6 @@ const BoxCSSTop = {
               </Box>
         </Box>
     </Box>
-    </form>
+    
     )
 }

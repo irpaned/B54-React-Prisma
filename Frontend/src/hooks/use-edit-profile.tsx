@@ -5,22 +5,23 @@ import { EditProfileForm } from '../features/profile/types/edit-profile';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EditProfileSchema } from '../features/profile/validators/edit-form';
-import { AxiosError } from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useEffect } from 'react';
+import { SET_USER } from '../redux/slices/auth';
 
 
-export const EditProfile = () => {
+export const EditProfile = (id : number) => {
 
         const currentUser = useSelector((state : RootState) => state.auth.user);
-
+        const dispatch = useDispatch()
+        
         const { data : user, refetch } = useQuery<UserEntity[]>({
             queryKey : ["user"], 
             queryFn : getUser})
         
         async function getUser() {
-            const response = await api.get(`/user/${currentUser.id}`)
+            const response = await api.get("/user/"+id)
                 return response.data
         }
 
@@ -37,31 +38,24 @@ export const EditProfile = () => {
           resolver : zodResolver(EditProfileSchema)
       })
 
-    const { mutateAsync } = useMutation<
-    UserEntity, 
-    AxiosError, 
-    EditProfileForm>({
-      mutationFn: (newUser) => {
-          const formData = new FormData();
-          formData.append("fullName", newUser.fullName);
-          formData.append("userName", newUser.userName);
-          formData.append("bio", newUser.userName);
+    const { mutateAsync } = useMutation({
+      mutationFn: async (newUser) => {
           console.log(newUser);
-
-          return api.patch(`/user/${currentUser.id}`, formData)
+          const response = await  api.patch("/user/"+id, newUser)
+          dispatch(SET_USER(response.data))
+          return response
       }
     })
 
     const onSubmit: SubmitHandler<EditProfileForm> = async (data) => {
         try {
-         await mutateAsync(data)
+        console.log("menjalankan update profile");
+         await mutateAsync(data as any)
          refetch()
         } catch (error) {
          console.log(error);
         }
-       }
-       console.log(onSubmit);
-       
+       }       
 
        return {
         user,

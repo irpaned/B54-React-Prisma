@@ -1,6 +1,7 @@
-import { Box, Heading, Text } from '@chakra-ui/react'
+import { Box, Button, ChakraProvider, Flex, FormControl, FormLabel, Heading, Input, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { api } from '../libraries/api'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 
 
@@ -18,8 +19,8 @@ export function Test() {
   const [posts, setPost] = useState<Post[]>([]);
 
   async function getPost () {
-    // const response = await api.get("/home");
-    const response = await api.get("/test");
+    const response = await api.get("/users");
+    // const response = await api.get("/test");
     setPost(response.data)
     console.log(response.data);
   }
@@ -37,8 +38,7 @@ export function Test() {
         {posts.map(value => {
           return (
             <>
-               <Text>Ini adalah title</Text>
-               <Text border="2px solid white" m="2">{value.title}</Text>
+               <Text border="2px solid white" m="2">{value.id}</Text>
             </>
           )
         })}
@@ -47,4 +47,6 @@ export function Test() {
   
   )
 }
+
+
 

@@ -1,9 +1,10 @@
-import { Box, Button, Flex, Heading, HStack, Icon, Link } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, HStack, Icon, Link, Text } from '@chakra-ui/react';
 
 import { BiSolidHomeSmile } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaRegHeart } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
+import { TbLogout2 } from "react-icons/tb";
 
 
 
@@ -43,7 +44,7 @@ export function LeftBar() {
       bg: "brand.800",
       color : "black"
     }
-  }
+  } 
 
   return (
     <>
@@ -82,6 +83,14 @@ export function LeftBar() {
         </Box>
         
         <Button sx={buttonCreate}>Create Post</Button>
+
+        <Button bg={'black'} mt={'60'}>
+          <HStack>
+          <Icon color={'white'} as={TbLogout2}/>
+          <Text color={'white'}>Log Out</Text>
+          </HStack>
+          </Button>
+          
         </Box>
     </>
   )
