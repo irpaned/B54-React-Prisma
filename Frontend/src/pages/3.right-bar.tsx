@@ -1,19 +1,21 @@
-import { Avatar, Box, Button, Card, CardBody, CardHeader, FormControl, HStack, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spacer, Text, border, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Box, Button, Card, CardBody, CardHeader, FormControl, HStack, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spacer, Text,  Textarea,  useDisclosure } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { UserSearch } from '../features/search/types/search'
 import { api } from '../libraries/api'
+import { EditProfile } from '../hooks/use-edit-profile'
 
 
 export function RightBar() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isFollowed, setIsFollowed] = useState<boolean>(true)
-
-  // coba redux
   const currentUser = useSelector((state : RootState) => state.auth.user);
     console.log(currentUser);
+  const {handleSubmit, onSubmit, register, errors} = EditProfile(currentUser.id)
+
+  // coba redux
 
   // BATAS TES
   
@@ -57,11 +59,10 @@ export function RightBar() {
   const buttonFollow = {
     
     color: "brand.800",
-    bg: "brand.700",
+    bg: "brand.900",
     borderRadius: "20px",
     fontSize: 'sm',
     p: "0px 20px 0px 20px",
-    border: "1px solid white",
     ":hover" : {
         bg : "brand.800",
         color: "brand.700",
@@ -72,17 +73,32 @@ export function RightBar() {
 
   const buttonFollowed = {
     
-    color: "brand.800",
-    bg: "brand.700",
+    color: "black",
+    bg: "brand.800",
     borderRadius: "20px",
     fontSize: 'sm',
     p: "0px 12px 0px 12px",
-    border: "1px solid white",
     ":hover" : {
         bg : "brand.800",
         color: "brand.700",
     },
     
+  }
+
+  const ButtonPost = {
+    bg: "brand.900",
+    color: "white",
+    borderRadius: 30,
+    p: "0px 15px 1px 15px",
+    ":hover" : {
+      bg: "white",
+      color : "black"
+    },
+    ":active" : {
+      color: "black",
+      bg : '#ACACAC'
+    }
+  
   }
 
   return (
@@ -101,59 +117,68 @@ export function RightBar() {
       <Box width="100&" h="65px" display="flex">
       <Avatar boxSize='4em' bg={"grey"} src={currentUser.photoProfile} position="relative" left="20px" bottom="35px" border="4px solid black" />
       <Spacer></Spacer>
-      <Button color="white" onClick={onOpen} aria-label='Options' variant='outline' size='sm' borderRadius="20px" mt="10px" bg={'brand.900'} border={'none'}  
-              _hover={{
-                      color: "brand.800",
-                      bg : '#039B1C'
-              }}
-              _active={{
-                      bg : '#05831A'
-              }}>
+      <Button color="white" onClick={onOpen} aria-label='Options' variant='outline' size='sm' borderRadius="20px" mt="10px" bg={'brand.900'} border={'none'} sx={ButtonPost}>
               Edit Profile
-              </Button>
+      </Button>
 
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent color={'white'} bg={'black'} boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"} borderRadius = '20px'>
-                  <ModalHeader>Edit profile</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    <Card bg="black" color="white"  borderRadius="20px">
-                      <CardBody padding="0 0 0 0">
-                        <Box w="100%" h="120px" borderRadius="10px" overflow="hidden">
-                          <Image  w="100%" h="100%" src='https://images.pexels.com/photos/547115/pexels-photo-547115.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' alt='Dan Abramov' />
-                        </Box>
+      <Modal isOpen={isOpen} onClose={onClose}>
 
-                        <Box width="100&" h="65px" display="flex">
-                        <Avatar boxSize='4em' bg={"grey"} src={currentUser.photoProfile} position="relative" left="20px" bottom="35px" border="4px solid black" />
-                        </Box>
-                      </CardBody>
-                    </Card>
-                  
-                    <FormControl>
-                      <Input border="1px solid #8E8E8E" placeholder='Name'/>
-                    </FormControl>
-                    <FormControl mt={4}>
-                      <Input border="1px solid #8E8E8E" placeholder='Username'/>
-                    </FormControl>
-                    <FormControl mt={4}>
-                      <Input border="1px solid #8E8E8E" placeholder='Bio'/>
-                    </FormControl>
-                  </ModalBody>
+<ModalOverlay />
+<ModalContent color={'white'} bg={'black'} boxShadow={"0 0 7px 1px rgba(255, 255, 255, 0.5)"} borderRadius = '20px'>
+  <ModalHeader>Edit profile</ModalHeader>
+  <ModalCloseButton />
+  <ModalBody>
+  {/* <form onSubmit={editProfile}> */}
+    <Card bg="black" color="white"  borderRadius="20px">
+      <CardBody padding="0 0 0 0">
+        <Box w="100%" h="120px" borderRadius="10px" overflow="hidden">
+          <Image  w="100%" h="100%" src='https://images.pexels.com/photos/547115/pexels-photo-547115.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' alt='Dan Abramov' />
+        </Box>
 
-                  <ModalFooter>
-                    <Button bg={'brand.900'} mr={3} onClick={onClose} color={'white'}  _hover={{
-                      color: "brand.800",
-                      bg : '#039B1C'
-              }}
-              _active={{
-                      bg : '#05831A'
-              }}>
-                      Save
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
+        <Box width="100&" h="65px" display="flex">
+        <Avatar boxSize='4em' bg={"grey"} src={currentUser.photoProfile} position="relative" left="20px" bottom="35px" border="4px solid black" />
+        </Box>
+      </CardBody>
+    </Card>
+  
+  
+    <FormControl>
+      <Input
+      {...register("fullName")}
+      defaultValue={currentUser.fullName}  border="1px solid #8E8E8E" placeholder='Full Name'/>
+    </FormControl>
+    <FormControl mt={4}>
+      <Input
+       {...register("userName")}
+       defaultValue={currentUser.userName} border="1px solid #8E8E8E" placeholder='Username'/>
+    </FormControl>
+    <FormControl mt={4}>
+      <Textarea
+      {...register("bio")}
+      defaultValue={currentUser.bio} placeholder="Bio" height="30px" resize={'none'} />
+    </FormControl>
+  </ModalBody>
+  
+  <ModalFooter>
+    <Button 
+    isDisabled={!!(errors.bio?.message || errors.fullName?.message || errors.userName?.message)}
+    bg={'brand.900'} 
+    mr={3} 
+    type='submit'
+    onClick={handleSubmit(onSubmit)} 
+    color={'white'}  
+    _hover={{
+      color: "brand.800",
+      bg : '#039B1C'
+    }}
+_active={{
+      bg : '#05831A'
+}}>
+      Save
+    </Button>
+  </ModalFooter>
+</ModalContent>
+</Modal>
       </Box>
       
       <Box marginTop="-5">
@@ -197,7 +222,7 @@ export function RightBar() {
       </HStack>
       <Spacer />
       {isFollowed ? (<Button onClick={() => { setIsFollowed(false) } }
-        sx={buttonFollow}>
+        sx={buttonFollow} >
         Follow
       </Button>)
         : <Button onClick={() => { setIsFollowed(true) } } sx={buttonFollowed}>

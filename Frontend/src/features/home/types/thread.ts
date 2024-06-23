@@ -7,3 +7,6 @@ export type CreateThreadDTO = {
 }
 
 
+export type UpdateThread = CreateThreadDTO
+
+

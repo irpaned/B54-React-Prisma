@@ -27,15 +27,15 @@ export function Profile () {
     
   // }
 
-    //  ini sudah betul
 const { isOpen, onOpen, onClose } = useDisclosure();
 
+// ini dari redux
 const currentUser = useSelector((state : RootState) => state.auth.user);
 console.log(currentUser);
-//  ini sudah betul
- const {handleSubmit, onSubmit, register, errors} = EditProfile(currentUser.id)
 
-// ini dari redux
+const {handleSubmit, onSubmit, register, errors} = EditProfile(currentUser.id)
+
+
 
 
 const BoxCSSTop = {
@@ -70,11 +70,12 @@ const BoxCSSTop = {
               
               <Button color="white" onClick={onOpen} aria-label='Options' variant='outline' size='sm' borderRadius="20px" mt="10px" bg={'brand.900'} border={'none'}  
               _hover={{
-                      color: "brand.800",
-                      bg : '#039B1C'
+                      color: "black",
+                      bg : 'white'
               }}
               _active={{
-                      bg : '#05831A'
+                      color: "black",
+                      bg : '#ACACAC'
               }}>
               Edit Profile
               </Button>
@@ -116,7 +117,6 @@ const BoxCSSTop = {
                       {...register("bio")}
                       defaultValue={currentUser.bio} placeholder="Bio" height="30px" resize={'none'} />
                     </FormControl>
-                    {/* </form> */}
                   </ModalBody>
                   
                   <ModalFooter>
@@ -126,10 +126,11 @@ const BoxCSSTop = {
                     mr={3} 
                     type='submit'
                     onClick={handleSubmit(onSubmit)} 
-                    color={'white'}  _hover={{
+                    color={'white'}  
+                    _hover={{
                       color: "brand.800",
                       bg : '#039B1C'
-              }}
+                    }}
               _active={{
                       bg : '#05831A'
               }}>

@@ -46,7 +46,7 @@ export function CardBeranda() {
             Home
           </Heading>
           <Box sx={BoxCSS}>
-    <Flex bg="black" mt="5">
+    <Flex bg="black" mt="0">
         <HStack>
             <WrapItem>
                 <Avatar size='md' name='Ryan Florence' src={currentUser.photoProfile} />{' '}
@@ -57,11 +57,25 @@ export function CardBeranda() {
             <Input 
             // (TanStack query  untuk post data step 2)
             {...register("content")}
-            w="380px" placeholder='What is Happening?' border="none" color="white" />
+            w="360px" placeholder='What is Happening?' border="none" color="white"
+            _active={{
+              border : 'none'
+            }}  />
       
             
             <label htmlFor='fileupload'>
-              <Icon color="brand.900" fontSize={25} as={FaImage}></Icon>
+              <Icon 
+              cursor={'pointer'} 
+              position={'relative'} 
+              top={2.5} 
+              paddingLeft={'5px'} 
+              color="brand.900" 
+              fontSize={35}
+              ml={'5px'}
+              _hover={{
+                color : 'white'
+              }} 
+              as={FaImage}/>
             </label>
 
             <Input 
@@ -70,7 +84,7 @@ export function CardBeranda() {
             id='fileupload'
             {...register("image")}
             type="file" w="380px" border="none" color="white"></Input>
-            <Button ml="5px" type='submit' sx={ButtonPost}>Post</Button>
+            <Button position={'relative'} bottom={'1'} ml="8px" type='submit' sx={ButtonPost}>Post</Button>
             </form>
         </HStack>
     </Flex>

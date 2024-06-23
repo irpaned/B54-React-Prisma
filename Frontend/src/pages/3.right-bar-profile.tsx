@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, CardBody, CardHeader, FormControl, HStack, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spacer, Text, border, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Box, Button, Card, CardBody, CardHeader, HStack, Heading, Spacer, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
@@ -85,6 +85,8 @@ export function RightBarProfile() {
     
   }
 
+  
+
   return (
 <Box bg="black" w='400px' h="100%" color="white" p="20px 15px 0 20px" m={0}>
   
@@ -119,14 +121,7 @@ export function RightBarProfile() {
     </Box>
   </CardBody>
 ))}
-  
-
-  
 </Card>
-
-
-
-
 </Box>
    
   )

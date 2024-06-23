@@ -78,6 +78,10 @@ export const useHomePage = () => {
       ":hover" : {
         bg: "white",
         color : "black"
+      },
+      ":active" : {
+        color: "black",
+        bg : '#ACACAC'
       }
     
     }
