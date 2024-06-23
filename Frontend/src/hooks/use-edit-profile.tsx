@@ -38,19 +38,22 @@ export const EditProfile = (id : number) => {
           resolver : zodResolver(EditProfileSchema)
       })
 
+    //   cundus
     const { mutateAsync } = useMutation({
+
       mutationFn: async (newUser) => {
           console.log(newUser);
-          const response = await  api.patch("/user/"+id, newUser)
-          dispatch(SET_USER(response.data))
+          const response = await api.patch("/user/"+id, newUser) // newUser yg ada di dalam parameter untuk apa?
+          dispatch(SET_USER(response.data)) 
           return response
+          
       }
     })
 
     const onSubmit: SubmitHandler<EditProfileForm> = async (data) => {
         try {
         console.log("menjalankan update profile");
-         await mutateAsync(data as any)
+         await mutateAsync(data as any) // cundus
          refetch()
         } catch (error) {
          console.log(error);

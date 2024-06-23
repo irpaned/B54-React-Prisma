@@ -9,7 +9,6 @@ import { api } from "../libraries/api";
 
 export const useHomePage = () => {
 
-    
     // 👇 Menggunakan TanStack query (TanStack query untuk get data step 1)
     const { data : threads, refetch } = useQuery<ThreadEntity[]>({
         queryKey : ["threads"], 
@@ -32,17 +31,14 @@ export const useHomePage = () => {
         resolver: zodResolver(createThreadSchemaZod)
     })
     
-    
-    
     // 👇 Menggunakan TanStack query (TanStack query  untuk post data step 1)
     // karena kita ingin menggunakan post maka pakai useMutation
-    const { mutateAsync } = useMutation<
-    ThreadEntity, 
-    AxiosError, 
-    CreateThreadDTO>({
+    const { mutateAsync } = useMutation<ThreadEntity, AxiosError, CreateThreadDTO>({
+      
       mutationFn: (newThread) => {
           const formData = new FormData();
           formData.append("content", newThread.content);
+          // cundus : ini agar bisa upload tanpa image
           if(newThread.image[0]) {
             formData.append("image", newThread.image[0]);
           }
@@ -83,15 +79,6 @@ export const useHomePage = () => {
         bg: "white",
         color : "black"
       }
-     
-    
-      // const BoxCSS = {
-      //   // border: "1px solid rgb(47, 51, 54)",
-      //   // borderTop: "none",
-      //   // borderRight: "none",
-      //   // borderLeft: "none",
-      //   p: "20px 15px 20px 15px"
-      // }
     
     }
 

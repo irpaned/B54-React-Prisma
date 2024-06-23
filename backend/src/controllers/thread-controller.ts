@@ -41,7 +41,7 @@ import { log } from "console";
     async function findManyProfile (req: Request, res: Response) {
         
         try {
-            // const user = res.locals.user
+           
             const { id } = req.params;
             const threads = await ThreadService.findManyProfile(Number(id))
             

@@ -45,6 +45,7 @@ async function updateProfile(req: Request, res: Response) {
       message : "Thread not found!"
   })
   
+  // cundus
   const editedProfile = await UserService.updateProfile(Number(id), req.body);
   res.json(editedProfile)
 

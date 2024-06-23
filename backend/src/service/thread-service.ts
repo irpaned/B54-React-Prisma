@@ -78,14 +78,12 @@ import { editProfileDTO } from "../dto/auth-dto";
           });
           
           if(dto.image) {
+            //   ini mksdnya di upload di folder b54circle yg ada di cloudinary
             const upload = await cloudinary.uploader.upload(dto.image, {
               upload_preset: "b54circle",
             });
-            dto.image= upload.secure_url
-          }
-
-        //   ini mksdnya di upload di folder b54circle yg ada di cloudinary
-          
+            dto.image= upload.secure_url // secure_url untuk apa?
+          }          
       
         //   ini memasukkan datanya ke prisma di table thread
           return await prisma.thread.create({

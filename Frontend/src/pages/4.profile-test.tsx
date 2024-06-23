@@ -1,21 +1,17 @@
-import {  Box, BoxProps, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import {  Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { ThreadCard} from '../features/home/component/thread-card.tsx';
 import { Profile } from '../features/profile/components/my-profile.tsx';
-import { useHomePage } from '../hooks/use-home-page.tsx';
-
-import { EditProfile } from '../hooks/use-edit-profile.tsx';
-import { UserEntity } from '../features/home/entities/user-entity.ts';
+// import { UserEntity } from '../features/home/entities/user-entity.ts';
 import { useProfilePage } from '../hooks/use-profile-page.tsx';
-import { ThreadProfileCard } from '../features/profile/components/thread-profile-card.tsx';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store.ts';
 
 
 
-interface ProfileCardProps extends BoxProps {
-  profile: UserEntity; 
+// interface ProfileCardProps extends BoxProps {
+//   profile: UserEntity; 
   
-}
+// }
 export function MyProfileTest() {
 
   const currentUser = useSelector((state : RootState) => state.auth.user);
@@ -23,10 +19,7 @@ export function MyProfileTest() {
 
     const {
     threads
-    } = useProfilePage(currentUser.id)
-
-    const {user} = EditProfile()
-
+    } = useProfilePage(currentUser.id) // currentUser.id ini kita panggil karena di parameter hooks nya kita membutuhkan userId
 
   const BoxProfile = {
     border: "1px solid rgb(47, 51, 54)",

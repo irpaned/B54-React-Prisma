@@ -20,6 +20,7 @@ import { EditProfile } from '../../../hooks/use-edit-profile'
 
 export function Profile () {
 
+  // ini mas cundus coba apakah tombol submitnya jalan 
   // const editProfile = (event : any) => {
   //   event.preventDefault()
   //   console.log("menjalakan submit");
