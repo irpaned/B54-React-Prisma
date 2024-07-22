@@ -6,6 +6,7 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { ThreadProfileEntity } from "../entities/thread-profile-entity";
 import { EditThread } from '../../../hooks/use-edit-thread';
+import { DeleteThread } from '../../../hooks/use-delete-thread';
 
 interface ThreadCardProps extends BoxProps {
     thread: ThreadProfileEntity; 
@@ -13,6 +14,7 @@ interface ThreadCardProps extends BoxProps {
 
 export function ThreadCardProfile({ thread }: ThreadCardProps) {
 
+    const { onDelete } = DeleteThread(thread.id)
     const {errors, handleSubmit, onSubmit, register} = EditThread(thread.id)
     const { isOpen, onOpen, onClose } = useDisclosure();
     
@@ -26,7 +28,7 @@ export function ThreadCardProfile({ thread }: ThreadCardProps) {
 
     return (
 
-    <>
+        <>
   
         <Box sx={BoxCSS}>
             <Card maxW='100%' bg="black" color="white" padding="0 0 0 0">
@@ -75,6 +77,7 @@ export function ThreadCardProfile({ thread }: ThreadCardProps) {
                                 fontWeight={"bold"}
                                 fontSize={"15px"} 
                                 bg={'black'} 
+                                onClick={onDelete}
                                 // onClick={onOpenDelete}
                                 w='100%'
                                 paddingLeft={'1.5'}
@@ -182,7 +185,7 @@ export function ThreadCardProfile({ thread }: ThreadCardProps) {
                 </Card>
             </Box>
             
-            </>
+            </> 
     )
 
     

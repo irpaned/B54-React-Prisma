@@ -4,14 +4,11 @@ import { api } from "../libraries/api";
 
 export const useProfilePage = (userId : number) => {
 
-    // 👇 Menggunakan TanStack query (TanStack query untuk get data step 1)
     const { data : threads } = useQuery<ThreadProfileEntity[]>({
-        queryKey : ["threads"], 
+        queryKey : ["mythreads"], 
         queryFn : getThreads})
         
-    
-        // 👇 (TanStack query untuk get data step 2)
-      async function getThreads() {
+    async function getThreads() {
         const response = await api.get("/threads/profile/"+userId, {
           headers : {
             Authorization : `Bearer ${localStorage.token}`
@@ -36,9 +33,7 @@ export const useProfilePage = (userId : number) => {
       ":hover" : {
         bg: "white",
         color : "black"
-      }
-
-    
+      }    
     }
 
     return {

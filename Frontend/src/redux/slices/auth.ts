@@ -7,21 +7,27 @@ interface User {
   email: string;
   photoProfile: string;
   bio: string;
+  TotalFollowers: number;
+  TotalFolloweds: number;
+  following: any;
 }
 
 export interface AuthState {
   user: User;
 }
 
-// DATA AWALNYA KITA BIKIN KOSONG/ ATAU SECARA DEFAULT KOSONG 
+// DATA AWALNYA KITA BIKIN KOSONG/ ATAU SECARA DEFAULT KOSONG
 const initialState: AuthState = {
   user: {
-    id : 0,
+    id: 0,
     fullName: "",
     email: "",
     userName: "",
     photoProfile: "",
     bio: "",
+    TotalFollowers: 0,
+    TotalFolloweds: 0,
+    following: 0,
   },
 };
 

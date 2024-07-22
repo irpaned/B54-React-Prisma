@@ -3,12 +3,13 @@
 // di export untuk digunakan di thread-entity.ts dan juga kepakai di types/search
 // di isi dari UserJWTPayload
 export type UserEntity = {
-    id: number;
-    userName: string;
-    fullName: string;
-    email: string;
-    photoProfile: string;
-    bio: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
+  id: number;
+  userName: string;
+  fullName: string;
+  email: string;
+  photoProfile: string;
+  user: UserEntity;
+  bio: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

@@ -1,48 +1,22 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
-import {
-  Box,
-  Button,
-  Text,
-  HStack,
-  Flex,
-  Avatar,
-  BoxProps,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Box, Button, Text, HStack, Flex, Avatar } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { RiUserSearchLine } from "react-icons/ri";
 import { UserSearch } from "../features/search/types/search";
-import { useDebounce } from "use-debounce";
 import { api } from "../libraries/api";
-import { useFollow } from "../hooks/use-follow-user";
-import { FollowEntity } from "../features/home/entities/follow-entity";
-import { useSearchPage } from "../hooks/use-search-page";
 
-export function SearchPage() {
-  // const { search } = useSearchPage();
-
-  const [searchInput, setSearchInput] = useState<string>("");
-  const [debouncedSearchInput] = useDebounce(searchInput, 400); // selama 0.4 detik akan ngehit ke backend
-  //  👇data awalnya kosong dan dibikin array
+export function SearchPageTest() {
+  const [isValue, setisValue] = useState("");
   const [searchData, setSearchData] = useState<UserSearch[]>([]);
 
-  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchInput(e.target.value);
-  }
-
-  async function getData() {
-    // 👇 ini get data user (get dan use data step  1)
-    const response = await api.get(`/users?search=${debouncedSearchInput}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    });
-    //   setelah di get datanya di masukkan ke searchData (get dan use data step  2)
+  const handleBlur = async () => {
+    const response = await api.get(`/users?search=${isValue}`);
     setSearchData(response.data);
-  }
+  };
 
   useEffect(() => {
-    getData();
-  }, [debouncedSearchInput]);
+    handleBlur();
+  }, []);
 
   const scrollbar = {
     "overflow-x": "hidden",
@@ -77,20 +51,19 @@ export function SearchPage() {
           <RiUserSearchLine size="23px" color="#B2B2B2" />
         </InputLeftElement>
         <Input
-          onChange={handleChange}
+          type="text"
+          value={isValue}
+          onChange={(e) => setisValue(e.target.value)}
+          onBlur={handleBlur}
           borderRadius="20px"
           border="none"
-          type="tel"
           placeholder="Search your friend"
           color="#B2B2B2"
           bg="#3F3F3F"
         />
+        {/* <Button onClick={handleChange}></Button> */}
       </InputGroup>
       {/* kita mapping datanya (get dan use data step  3) */}
-      {/* {search?.map((user) => (
-        <searchCard user={user} />
-      ))} */}
-
       {searchData.map((user) => (
         <Flex mb="15px" gap={3}>
           <HStack>
