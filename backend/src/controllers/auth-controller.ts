@@ -44,8 +44,6 @@ async function register(req: Request, res: Response)  {
         } 
     */
 
-    
-    
     try {
         const user = await AuthService.register(req.body);
 

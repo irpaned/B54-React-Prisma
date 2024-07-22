@@ -1,7 +1,6 @@
 export type CreateThreadDTO = {
-    content : string,
-    image : string,
-
+  content: string;
+  image: string | null;
 };
 
-export type UpdateThreadDTO = CreateThreadDTO
+export type UpdateThreadDTO = CreateThreadDTO;
