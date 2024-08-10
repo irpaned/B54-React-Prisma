@@ -19,6 +19,10 @@ export const useLike = (threadId: number) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["threadsKey"] });
+      queryClient.invalidateQueries({ queryKey: ["mythreads"] });
+    },
+    onError: () => {
+      console.log("Failed to like the thread");
     },
   });
 

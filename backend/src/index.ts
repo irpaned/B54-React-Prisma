@@ -77,6 +77,7 @@ routerv1.get("/", async (req: Request, res: Response) => {
   res.send("Welcome to v1");
 });
 
+// THREADS
 routerv1.get(
   "/threads",
   authenticate,
@@ -114,20 +115,34 @@ routerv1.post(
   ThreadController.reply
 );
 
+// LIKE
 routerv1.post("/like/:id", authenticate, ThreadController.like);
 routerv1.delete("/unlike/:id", authenticate, ThreadController.unlike);
 
+// FOLLOW
 routerv1.post("/follow/:id", authenticate, UserController.follow);
-// routerv1.delete("/unfollow/:id", authenticate, UserController.unfollow);
 
+// AUTH
 routerv1.post("/auth/login", AuthController.login);
-routerv1.post("/auth/register", AuthController.register);
-routerv1.post("/auth/check", authenticate, AuthController.check);
-routerv1.get("/auth/verify-email", AuthController.verifyEmail);
 
+routerv1.post("/auth/check", authenticate, AuthController.check);
+routerv1.post("/auth/register", AuthController.register);
+routerv1.post("/auth/reset-password", AuthController.resetPassword);
+routerv1.patch("/auth/resetpassword", AuthController.ResetPassword);
+routerv1.get("/auth/verify-email", AuthController.verifyEmail);
+routerv1.get(
+  "/auth/verify-email-reset-password",
+  AuthController.verifyEmailForForgotPassword
+);
+
+// USER
 routerv1.get("/user/:id", UserController.findOneProfile);
 routerv1.get("/users", authenticate, UserController.find);
-routerv1.patch("/user/:id", UserController.updateProfile);
+routerv1.patch(
+  "/user/:id",
+  upload.single("photoProfile"),
+  UserController.updateProfile
+);
 
 // v2
 routerv2.get("/", (req: Request, res: Response) => {

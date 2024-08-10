@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { UserJWTPayload } from "../types/auth";
 import { editProfileDTO } from "../dto/auth-dto";
+import { v2 as cloudinary } from "cloudinary";
 
 const prisma = new PrismaClient();
 
@@ -80,6 +80,19 @@ async function updateProfile(id: number, dto: editProfileDTO) {
 
     if (dto.bio) {
       user.bio = dto.bio;
+    }
+
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+
+    if (dto.photoProfile) {
+      const upload = await cloudinary.uploader.upload(dto.photoProfile, {
+        upload_preset: "b54circle",
+      });
+      user.photoProfile = dto.photoProfile = upload.secure_url;
     }
     return await prisma.user.update({
       where: { id: Number(id) },

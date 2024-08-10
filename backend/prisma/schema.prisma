@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id           Int     @id @default(autoincrement())
-  email        String  @unique // cuma boleh ada 1 jenis email
-  userName     String  @unique
-  fullName     String
-  password     String
-  photoProfile String?
-  bio          String?
-  isVerified   Boolean @default(false)
+  id              Int     @id @default(autoincrement())
+  email           String  @unique // cuma boleh ada 1 jenis email
+  userName        String  @unique
+  fullName        String
+  password        String
+  photoProfile    String?
+  bio             String?
+  isVerified      Boolean @default(false)
+  isVerifiedEmail Boolean @default(false)
 
   threads Thread[]
   replies Reply[]

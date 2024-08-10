@@ -21,7 +21,6 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 // import { UserSearch } from "../features/search/types/search";
@@ -222,12 +221,12 @@ export function RightBar() {
             </Text>
             <Text>{currentUser.bio}</Text>
             <Box display="flex">
-              <Text marginRight="4px">{currentUser.following}</Text>
-              <Text marginRight="10px" color="grey">
+              <Text marginRight="4px">{currentUser.TotalFollowers}</Text>
+              <Text color="grey">Followers</Text>
+              <Text marginLeft="10px">{currentUser.TotalFolloweds}</Text>
+              <Text marginLeft="4px" color="grey">
                 Following
               </Text>
-              <Text marginRight="4px">321</Text>
-              <Text color="grey">Followers</Text>
             </Box>
           </Box>
         </CardBody>

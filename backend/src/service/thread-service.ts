@@ -56,22 +56,58 @@ async function findOne(id: number) {
 
 async function findManyProfile(userId: number) {
   try {
-    const thread = await prisma.thread.findMany({
+    const data = await prisma.thread.findMany({
       where: { userId },
       include: {
         user: true,
+        likes: true,
+        replies: true,
       },
     });
 
     if (!thread) throw new String("Thread not found!");
 
-    return thread;
+    return data.map((thread) => {
+      return {
+        ...thread,
+        TotalLikes: thread.likes.length,
+        isLiked: thread.likes.some((like) => like.userId === userId),
+        TotalReplies: thread.replies.length,
+        isReplied: thread.replies.some((replies) => replies.userId === userId),
+      };
+    });
   } catch (error) {
     throw new String(error);
   }
 }
 
-// 👇 bikin parameter, kenapa userId bukan pakai user? karena ada hubungannya dengan data yg ada prisma (menggunakan relasi user step 2)
+// async function findCardImage(userId: number, image: string) {
+//   try {
+//     const data = await prisma.thread.findMany({
+//       where: { userId, image },
+//       include: {
+//         user: true,
+//         likes: true,
+//         replies: true,
+//       },
+//     });
+
+//     if (!thread) throw new String("Thread not found!");
+
+//     return data.map((thread) => {
+//       return {
+//         ...thread,
+//         TotalLikes: thread.likes.length,
+//         isLiked: thread.likes.some((like) => like.userId === userId),
+//         TotalReplies: thread.replies.length,
+//         isReplied: thread.replies.some((replies) => replies.userId === userId),
+//       };
+//     });
+//   } catch (error) {
+//     throw new String(error);
+//   }
+// }
+
 async function create(dto: CreateThreadDTO, userId: number) {
   try {
     //   validasi menggunakan joi
@@ -88,16 +124,13 @@ async function create(dto: CreateThreadDTO, userId: number) {
     });
 
     if (dto.image) {
-      //   ini mksdnya di upload di folder b54circle yg ada di cloudinary
       const upload = await cloudinary.uploader.upload(dto.image, {
         upload_preset: "b54circle",
       });
       dto.image = upload.secure_url; // secure_url untuk apa?
     }
 
-    //   ini memasukkan datanya ke prisma di table thread
     return await prisma.thread.create({
-      //              👇parameter passing disini (relasi step 3)
       data: { ...dto, userId: userId },
     });
   } catch (error) {
@@ -139,4 +172,11 @@ async function remove(id: number) {
   }
 }
 
-export default { find, findOne, create, update, remove, findManyProfile };
+export default {
+  find,
+  findOne,
+  create,
+  update,
+  remove,
+  findManyProfile,
+};

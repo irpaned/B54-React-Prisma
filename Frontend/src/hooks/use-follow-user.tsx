@@ -1,10 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import { FollowUserEntity } from "../features/user/types/follow-user-entity";
+// import { FollowUserEntity } from "../features/user/types/follow-user-entity";
 import { api } from "../libraries/api";
+import { useDispatch, useSelector } from "react-redux";
+import { SET_USER } from "../redux/slices/auth";
+import { RootState } from "../redux/store";
 export const useFollow = (followedId: number) => {
-  const { mutateAsync } = useMutation<FollowUserEntity>({
+  const currentUser = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: async () => {
-      return await api.post(
+      const response = await api.post(
         "follow/" + followedId,
         {},
         {
@@ -13,6 +18,8 @@ export const useFollow = (followedId: number) => {
           },
         }
       );
+      dispatch(SET_USER(response.data));
+      return response;
     },
   });
 
@@ -20,5 +27,5 @@ export const useFollow = (followedId: number) => {
     await mutateAsync();
   };
 
-  return { handleFollow };
+  return { handleFollow, isPending };
 };

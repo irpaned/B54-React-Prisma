@@ -11,9 +11,13 @@ async function find(req: Request, res: Response) {
     const users = await UserService.find(search, user.id);
     const newUser = users.map((user) => {
       const followers = user.followers;
+      const followeds = user.followeds;
       return {
         ...user,
-        isFollowed: followers.some(
+        isFollowed: followeds.some(
+          (followed) => followed.followerId == userLogged.id
+        ),
+        isFollower: followers.some(
           (follower) => follower.followerId == userLogged.id
         ),
       };
@@ -47,6 +51,10 @@ async function findOneProfile(req: Request, res: Response) {
 async function updateProfile(req: Request, res: Response) {
   try {
     const { id } = req.params;
+    const body = {
+      ...req.body,
+      photoProfile: req.file ? req.file.path : "",
+    };
 
     // pengecekan
     const user = await UserService.findOneProfile(Number(id));
@@ -56,7 +64,7 @@ async function updateProfile(req: Request, res: Response) {
       });
 
     // cundus
-    const editedProfile = await UserService.updateProfile(Number(id), req.body);
+    const editedProfile = await UserService.updateProfile(Number(id), body);
     res.json(editedProfile);
   } catch (error) {
     res.status(500).json({
@@ -79,18 +87,18 @@ async function follow(req: Request, res: Response) {
   }
 }
 
-async function unfollow(req: Request, res: Response) {
-  try {
-    const user = res.locals.user;
-    const { id } = req.params;
-    const unfollow = await FollowService.follow(parseInt(id), user.id);
+// async function unfollow(req: Request, res: Response) {
+//   try {
+//     const user = res.locals.user;
+//     const { id } = req.params;
+//     const unfollow = await FollowService.follow(parseInt(id), user.id);
 
-    res.status(200).json(unfollow);
-  } catch (error) {
-    res.status(500).json({
-      messahe: error,
-    });
-  }
-}
+//     res.status(200).json(unfollow);
+//   } catch (error) {
+//     res.status(500).json({
+//       messahe: error,
+//     });
+//   }
+// }
 
-export default { find, updateProfile, findOneProfile, follow, unfollow };
+export default { find, updateProfile, findOneProfile, follow };

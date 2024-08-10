@@ -49,6 +49,24 @@ async function findManyProfile(req: Request, res: Response) {
   }
 }
 
+// async function findCardImage(req: Request, res: Response) {
+//   try {
+//     const { id, image } = req.params;
+//     const threads = await ThreadService.findCardImage(
+//       Number(id),
+//       String(image)
+//     );
+
+//     if (!threads) {
+//       return res.status(404).json({ message: "Thread not found" });
+//     }
+
+//     res.json(threads);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// }
+
 async function create(req: Request, res: Response) {
   // "multipart/form-data" : ini agar file gambar bisa menjadi file upload
 
@@ -88,14 +106,12 @@ async function update(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
-    // pengecekan
     const thread = await ThreadService.findOne(Number(id));
 
     if (!thread)
       res.status(404).json({
         message: "Thread not found!",
       });
-    // pengecekan
 
     const updatedThread = await ThreadService.update(Number(id), req.body);
     res.json(updatedThread);

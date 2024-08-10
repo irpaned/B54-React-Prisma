@@ -19,7 +19,6 @@ interface SuggestCardProps extends BoxProps {
 
 export function SuggestCard({ suggest }: SuggestCardProps) {
   const { handleFollow } = useFollow(suggest.id);
-  console.log("ini suggest 2", suggest);
 
   const buttonFollow = {
     color: "brand.800",
