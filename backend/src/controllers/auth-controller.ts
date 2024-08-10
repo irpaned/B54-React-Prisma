@@ -120,10 +120,9 @@ async function resetPassword(req: Request, res: Response) {
 
 async function ResetPassword(req: Request, res: Response) {
   try {
-    const body = req.body;
+    const reset = await AuthService.reset(req.body);
 
-    const user = await authService.reset(body);
-    res.status(200).json(user);
+    res.status(200).json(reset);
   } catch (error) {
     console.log(error);
   }
@@ -148,6 +147,6 @@ export default {
   check,
   verifyEmail,
   resetPassword,
-  verifyEmailForForgotPassword,
   ResetPassword,
+  verifyEmailForForgotPassword,
 };

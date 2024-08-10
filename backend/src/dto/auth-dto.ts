@@ -18,6 +18,7 @@ export type editProfileDTO = {
 };
 
 export type ResetDTO = {
+  id: Number;
   email: string;
   password: string;
 };

@@ -18,7 +18,7 @@ import { ResetPassword } from "./pages/9.reset-password";
 // import { Forgot } from "./pages/10.forgot-password";
 
 function App() {
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   // bagian dari redux
   const dispatch = useDispatch();
   // ------ INI BERHUBUNGAN DENGAN PRIVATE ROUTE ---------
@@ -36,6 +36,7 @@ function App() {
 
   async function authCheck() {
     try {
+      console.log("test");
       const token = localStorage.token;
       const response = await api.post(
         "/auth/check",

@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { api } from "../../../libraries/api";
-import { ResetForm } from "../types/reset-form";
-// import { useToast } from '@chakra-ui/react'
-// import { useDispatch } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { ResetFormSchema } from "../validators/reset-form";
 import { ResetPassword } from "../types/reset-password";
 import { ResetPasswordSchema } from "../validators/reset-password";
 
@@ -15,15 +10,6 @@ export const useResetPasswordForm = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
-
-  // const toast = useToast()
-  // const dispatch = useDispatch()
-  // const navigate = useNavigate()
-
-  const [form, setForm] = useState<ResetPassword>({
-    email: "",
-    password: "",
-  });
 
   const {
     register,

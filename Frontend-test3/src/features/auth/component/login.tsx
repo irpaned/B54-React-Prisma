@@ -1,6 +1,5 @@
 import {
   Box,
-  BoxProps,
   Button,
   Flex,
   Heading,
@@ -12,9 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useLoginForm } from "../hook/use-login-form";
 
-interface LoginFormProps extends BoxProps {}
-
-export function LoginForm(props: LoginFormProps) {
+export function LoginForm() {
   const { handleSubmit, onSubmit, register, errors, handleClick, show } =
     useLoginForm();
 

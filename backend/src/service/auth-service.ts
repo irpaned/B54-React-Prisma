@@ -147,16 +147,11 @@ async function reset(dto: ResetDTO) {
       const hashedPassword = await bcrypt.hash(dto.password, salt);
       user.password = hashedPassword;
     }
-    console.log("test");
 
-    if (user.isVerifiedEmail == false) {
-      throw new String("User not found!");
-    } else {
-      return await prisma.user.update({
-        where: { email: String(dto.email), isVerifiedEmail: true },
-        data: user,
-      });
-    }
+    return await prisma.user.update({
+      where: { email: String(dto.email) },
+      data: user,
+    });
   } catch (error) {
     console.log(error);
   }
