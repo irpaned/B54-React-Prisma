@@ -150,7 +150,10 @@ async function reset(dto: ResetDTO) {
 
     return await prisma.user.update({
       where: { email: String(dto.email) },
-      data: user,
+      data: {
+        password: user.password,
+        isVerifiedEmail: false,
+      },
     });
   } catch (error) {
     console.log(error);
