@@ -1,0 +1,48 @@
+import { Container, Text } from '@chakra-ui/react'
+import React from 'react'
+
+export function LeftBar() {
+  return (
+    <>
+        <Container bg="black" w="100%" color="white">
+
+        <Text>
+            test
+        </Text>
+
+        </Container>
+    </>
+  )
+}
+
+<MenuButton
+                  // as={IconButton}
+                  aria-label='Options'
+                  // icon={<BsThreeDots />}
+                  // variant='outline'
+                  color={"white"}
+                  border={"none"}
+                  fontWeight={'bold'}
+                  h={'35px'}
+                  bg={'brand.900'}
+                  padding={'0px 15px 0px 15px'}
+                  borderRadius={'25px'}
+                  mt={'5px'}
+                  _hover={{
+                      color: "brand.800",
+                      bg : '#039B1C'
+                  }}
+                  _active={{
+                      bg : "black"
+                  }}
+                                    
+              >
+                Edit Profile
+              </MenuButton>
+              <MenuList>
+              <MenuItem>
+                  <Input></Input>
+              </MenuItem>
+
+              </MenuList>
+
