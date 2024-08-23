@@ -59,7 +59,7 @@ export function CardBeranda() {
                 <WrapItem>
                   <Avatar
                     size="md"
-                    name="Ryan Florence"
+                    name={currentUser.fullName}
                     src={currentUser.photoProfile}
                   />{" "}
                 </WrapItem>

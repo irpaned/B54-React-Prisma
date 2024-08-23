@@ -18,7 +18,8 @@ import { ResetPassword } from "./pages/9.reset-password";
 // import { Forgot } from "./pages/10.forgot-password";
 
 function App() {
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
+
   // bagian dari redux
   const dispatch = useDispatch();
   // ------ INI BERHUBUNGAN DENGAN PRIVATE ROUTE ---------
@@ -26,7 +27,8 @@ function App() {
 
   const PrivateRoute = () => {
     if (!isLoading) {
-      if (currentUser.email) return <Outlet />;
+      console.log("test", currentUser);
+      if (currentUser) return <Outlet />;
 
       return <Navigate to={"/auth/login"} />;
     }
@@ -47,7 +49,7 @@ function App() {
           },
         }
       );
-
+      console.log("res", response);
       dispatch(
         SET_USER({
           ...response.data,
@@ -66,7 +68,7 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.token;
-
+    console.log("cek token", token);
     if (token) authCheck();
   }, []);
 

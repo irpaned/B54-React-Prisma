@@ -85,7 +85,7 @@ export function LeftBar() {
           <Flex sx={CssDivFlex}>
             <HStack>
               <Icon sx={IconCss} as={FaRegHeart} />
-              <Link style={{ fontSize: 20 }} to="#">
+              <Link style={{ fontSize: 20 }} to="/follow">
                 Follow
               </Link>
             </HStack>

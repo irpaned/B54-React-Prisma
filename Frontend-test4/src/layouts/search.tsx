@@ -5,10 +5,9 @@ import { SearchPage } from "../pages/8.search";
 
 export default function Search() {
   return (
-    <Flex>
+    <Flex justify={"center"} position={"relative"} right={"20"}>
       <LeftBar />
       <SearchPage />
-      {/* <SearchPageTest /> */}
       <RightBar />
     </Flex>
   );

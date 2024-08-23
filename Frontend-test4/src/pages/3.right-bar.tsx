@@ -26,6 +26,7 @@ import { RootState } from "../redux/store";
 import { EditProfile } from "../hooks/use-edit-profile";
 import { SuggestCard } from "../features/suggest/component/suggest-card";
 import { useSuggest } from "../hooks/use-suggest";
+import { useCountFollow } from "../hooks/use-count-follow";
 
 export function RightBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,6 +35,8 @@ export function RightBar() {
     currentUser.id
   );
   const { suggests } = useSuggest();
+
+  const { countFollow } = useCountFollow(currentUser.id);
 
   const scrollbar = {
     "overflow-x": "hidden",
@@ -221,9 +224,9 @@ export function RightBar() {
             </Text>
             <Text>{currentUser.bio}</Text>
             <Box display="flex">
-              <Text marginRight="4px">{currentUser.TotalFolloweds}</Text>
+              <Text marginRight="4px">{countFollow?.TotalFollower}</Text>
               <Text color="grey">Followers</Text>
-              <Text marginLeft="10px">{currentUser.TotalFollowers}</Text>
+              <Text marginLeft="10px">{countFollow?.TotalFollowing}</Text>
               <Text marginLeft="4px" color="grey">
                 Following
               </Text>
@@ -234,7 +237,8 @@ export function RightBar() {
 
       <Card
         overflow={"scroll"}
-        height={"300px"}
+        // height={"300px"}
+        maxHeight={"300px"}
         bg="black"
         color="white"
         border="1px solid rgb(47, 51, 54)"
@@ -245,13 +249,15 @@ export function RightBar() {
         <CardHeader>
           <Heading size="md">Suggested for you</Heading>
         </CardHeader>
-        {suggests?.map((suggest) => (
-          <SuggestCard
-            key={suggest.id}
-            {...suggest}
-            isFollowing={suggest.isFollowed}
-          />
-        ))}
+        <CardBody paddingTop={0}>
+          {suggests?.map((suggest) => (
+            <SuggestCard
+              key={suggest.id}
+              {...suggest}
+              isFollowing={suggest.isFollowed}
+            />
+          ))}
+        </CardBody>
       </Card>
     </Box>
   );

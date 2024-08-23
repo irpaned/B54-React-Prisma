@@ -128,6 +128,7 @@ import { SET_USER } from "./redux/slices/auth";
 import { RootState } from "./redux/store";
 import { Reset } from "./pages/10.reset";
 import { ResetPassword } from "./pages/9.reset-password";
+import FollowPage from "./layouts/follow";
 // import { Forgot } from "./pages/10.forgot-password";
 
 function App() {
@@ -200,6 +201,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         {/* <Route path="/search" element={<SearchPage />} /> */}
         <Route path="/search" element={<Search />} />
+        <Route path="/follow" element={<FollowPage />} />
         {/* <Route path="/searchTest" element={<SearchPageTest/>}/> */}
 
         <Route path="/dashboard" element={<Dashboard />} />

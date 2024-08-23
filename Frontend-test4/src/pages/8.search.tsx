@@ -1,23 +1,16 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input";
-import { Box, Text, HStack, Flex, Avatar, Card } from "@chakra-ui/react";
+import { Box, Card } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { RiUserSearchLine } from "react-icons/ri";
-import { UserSearch } from "../features/search/types/search";
 import { useDebounce } from "use-debounce";
-import { api } from "../libraries/api";
-import { useFollow } from "../hooks/use-follow-user";
-import ButtonFollow from "../components/ui/button-follow";
-import { useSuggest } from "../hooks/use-suggest";
+import { UserSearch } from "../features/search/types/search";
 import { SuggestCard } from "../features/suggest/component/suggest-card";
+import { api } from "../libraries/api";
 
 export function SearchPage() {
-  // const { isPending, onFollow } = useFollow(id);
-  // const { suggests } = useSuggest();
   const [searchInput, setSearchInput] = useState<string>("");
   const [debouncedSearchInput] = useDebounce(searchInput, 100);
   const [searchData, setSearchData] = useState<UserSearch[]>([]);
-
-  console.log("OOOOOOOOOOOKKKKKKKKKKKKKKKKK");
 
   async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchInput(e.target.value);
@@ -30,8 +23,6 @@ export function SearchPage() {
     });
     setSearchData(response.data);
   }
-
-  // console.log("data :", searchData);
 
   useEffect(() => {
     getData();
@@ -64,7 +55,6 @@ export function SearchPage() {
       overflow="scroll"
       sx={scrollbar}
     >
-      {/* <Input   placeholder="Search your friend" size='md' />    */}
       <InputGroup mb="20px">
         <InputLeftElement pointerEvents="none">
           <RiUserSearchLine size="23px" color="#B2B2B2" />
@@ -80,36 +70,8 @@ export function SearchPage() {
         />
       </InputGroup>
 
-      {/* {searchData.map((user) => (
-        <Flex mb="15px" gap={3}>
-          <HStack>
-            <Avatar
-              width={"50px"}
-              height={"50px"}
-              name={user.fullName}
-              src={user.photoProfile}
-            />
-            <Box w="420px">
-              <Text fontWeight={"bold"}>{user.fullName}</Text>
-              <Text mt={"0px"} color={"gray"}>
-                @{user.userName} {user.id}
-              </Text>
-              <Text mt={"0px"}>{user.bio}</Text>
-            </Box>
-
-            <ButtonFollow
-              isFollowing={user.isFollowed}
-              isLoading={isPending}
-              onClick={onFollow}uhyu7,
-            />
-          </HStack>
-        </Flex>
-      ))} */}
-
-      {/* {searchData && <h1>Nothing</h1>} */}
       {searchData &&
         searchData.map((search) => {
-          // console.log("SADSADAS", search);
           return (
             <Card key={search.id} bg="black">
               <SuggestCard

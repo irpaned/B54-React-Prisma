@@ -1,14 +1,13 @@
 import { Flex } from "@chakra-ui/react";
+import { Follow } from "../pages/12.follow";
 import { LeftBar } from "../pages/2.left-bar";
 import { RightBar } from "../pages/3.right-bar";
-import { SearchPage } from "../pages/8.search";
 
-export default function Search() {
+export default function FollowPage() {
   return (
-    <Flex>
+    <Flex justify={"center"} position={"relative"} right={"20"}>
       <LeftBar />
-      <SearchPage />
-      {/* <SearchPageTest /> */}
+      <Follow />
       <RightBar />
     </Flex>
   );

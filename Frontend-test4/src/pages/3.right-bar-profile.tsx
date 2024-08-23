@@ -1,4 +1,4 @@
-import { Box, Card, CardHeader, Heading } from "@chakra-ui/react";
+import { Box, Card, CardBody, CardHeader, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -47,8 +47,9 @@ export function RightBarProfile() {
     <Box bg="black" w="400px" h="100%" color="white" p="20px 15px 0 20px" m={0}>
       <Card
         overflow={"scroll"}
-        height={"300px"}
+        // height={"300px"}
         bg="black"
+        maxHeight={"300px"}
         color="white"
         border="1px solid rgb(47, 51, 54)"
         borderRadius="20px"
@@ -58,13 +59,15 @@ export function RightBarProfile() {
         <CardHeader>
           <Heading size="md">Suggested for you</Heading>
         </CardHeader>
-        {suggests?.map((suggest) => (
-          <SuggestCard
-            key={suggest.id}
-            {...suggest}
-            isFollowing={suggest.isFollowed}
-          />
-        ))}
+        <CardBody paddingTop={0}>
+          {suggests?.map((suggest) => (
+            <SuggestCard
+              key={suggest.id}
+              {...suggest}
+              isFollowing={suggest.isFollowed}
+            />
+          ))}
+        </CardBody>
       </Card>
     </Box>
   );

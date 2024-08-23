@@ -28,27 +28,27 @@ export function SuggestCard({
 }) {
   const { isPending, onFollow } = useFollow(id);
   return (
-    <CardBody paddingTop="0" paddingBottom="2">
-      <Box display="flex">
-        <HStack>
-          <Avatar boxSize="2.5em" src={photoProfile} name={fullName} />
-          <Box>
-            <Heading size="xs" color="white">
-              {fullName}
-            </Heading>
-            <Text fontSize="sm" color="grey">
-              @{userName}
-            </Text>
-          </Box>
-        </HStack>
-        <Spacer />
+    // <CardBody paddingTop="0" paddingBottom="0" height={"25px"}>
+    <Box display="flex" paddingBottom={2}>
+      <HStack>
+        <Avatar boxSize="2.5em" src={photoProfile} name={fullName} />
+        <Box>
+          <Heading size="xs" color="white">
+            {fullName}
+          </Heading>
+          <Text fontSize="sm" color="grey">
+            @{userName}
+          </Text>
+        </Box>
+      </HStack>
+      <Spacer />
 
-        <ButtonFollow
-          isFollowing={isFollowing}
-          isLoading={isPending}
-          onClick={onFollow}
-        />
-      </Box>
-    </CardBody>
+      <ButtonFollow
+        isFollowing={isFollowing}
+        isLoading={isPending}
+        onClick={onFollow}
+      />
+    </Box>
+    // </CardBody>
   );
 }

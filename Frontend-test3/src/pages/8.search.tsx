@@ -7,9 +7,12 @@ import { useDebounce } from "use-debounce";
 import { api } from "../libraries/api";
 import { useFollow } from "../hooks/use-follow-user";
 import ButtonFollow from "../components/ui/button-follow";
+import { useSuggest } from "../hooks/use-suggest";
+import { SuggestCard } from "../features/suggest/component/suggest-card";
 
-export function SearchPage(id: number) {
+export function SearchPage({ id }: { id: number }) {
   const { isPending, onFollow } = useFollow(id);
+  const { suggests } = useSuggest();
   const [searchInput, setSearchInput] = useState<string>("");
   const [debouncedSearchInput] = useDebounce(searchInput, 100);
   const [searchData, setSearchData] = useState<UserSearch[]>([]);
@@ -100,6 +103,14 @@ export function SearchPage(id: number) {
           </HStack>
         </Flex>
       ))}
+
+      {/* {searchData.map((suggest) => (
+        <SuggestCard
+          key={suggest.id}
+          {...suggest}
+          isFollowing={suggest.isFollowed}
+        />
+      ))} */}
     </Box>
   );
 }

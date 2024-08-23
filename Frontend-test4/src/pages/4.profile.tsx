@@ -28,8 +28,23 @@ export function MyProfile() {
     borderLeft: "none",
   };
 
+  const scrollbar = {
+    "overflow-x": "hidden",
+    "::-webkit-scrollbar": {
+      width: "10px",
+    },
+    "::-webkit-scrollbar-track": {
+      border: "7px solid black",
+    },
+    "::-webkit-scrollbar-thumb": {
+      background: "linear-gradient(transparent,green)",
+      borderRadius: "6px",
+    },
+  };
+
   return (
     <Box
+      sx={scrollbar}
       w="600px"
       m="0"
       bg="black"
